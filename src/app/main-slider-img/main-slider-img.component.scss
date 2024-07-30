@@ -1,0 +1,147 @@
+.slider-container {
+  position: relative;
+  width: 100%;
+}
+
+.carousel {
+  .slide {
+    position: relative;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .slide-content {
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 40%;
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          margin: 5px 0;
+          font-size: 16px;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+
+          &.learn-more {
+            background-color: #fff;
+            color: #000;
+          }
+
+          &.add-to-cart {
+            background-color: #000;
+            color: #fff;
+          }
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}
+
+// carousel img
+img.slide-image {
+  height: 300px;
+  filter:drop-shadow(2px 4px 6px black)
+}
+
+img.custom-image {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+::ng-deep .slick-next{
+  right: 0 !important;
+}
+
+//reusable component syling
+.custom-styles-for-second-slider{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around !important;
+}
+
+@media (max-width: 530px) {
+  .carousel .slide {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .carousel .slide-content {
+    max-width: 100%;
+
+    h2 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    ul li {
+      font-size: 14px;
+    }
+
+    .buttons {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .buttons button {
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+
+  img.slide-image {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  img.custom-image {
+    top: 10%;
+    right: 0;
+    width: 80%;
+    height: auto;
+  }
+
+  .custom-styles-for-second-slider {
+    flex-direction: column;
+    justify-content: center !important;
+  }
+}

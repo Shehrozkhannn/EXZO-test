@@ -1,0 +1,128 @@
+.main-container{
+  display: flex;
+  .popular-categories{
+    width: 51%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+      ul{
+        list-style-type: none;
+        li{
+          margin: 21px 0px;
+          cursor: pointer;
+          span{
+            font-size: 13px;
+          }
+          b{
+            margin-right: 10px;
+          }
+          &:hover{
+            color: #b1cd02;
+          }
+        }
+      }
+    .popular-categories-heading{
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .view-categories-btn{
+      button{
+        height: 44px;
+        border-radius: 27px;
+        width: 175px;
+        border: none;
+        background: #b1cd02;
+        cursor: pointer;
+        }
+    }
+  }
+  .categories-imgs{
+    display: flex;
+    .view-products{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      padding-bottom: 35px;
+      p{
+        margin: 0px 26px;
+      }
+      span{
+        margin-top: 10px;
+        font-size: 18px;
+      }
+      img{
+        height: 243px;
+        width: 260px;
+      }
+    }
+  }
+}
+
+//STARS RATING STYLING
+.star{
+  margin: 0px 0px;
+  color: #a9a5a5;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .3s;
+  transform: scale(1);
+}
+.star .mat-icon{
+    width: 40px;
+    height: 40px;
+}
+.star-gold{
+  color: orange;
+}
+
+/* make all stars orange*/
+.star-rating-animation:hover .star-hover{
+  color: orange;
+}
+/* make all stars right from selected gray*/
+.star-rating-animation .star-hover:hover ~ .star-hover{
+  color: #ddd;
+}
+.star-rating-animation .star-hover:hover{
+  transform: scale(1.3);
+}
+
+@media (max-width: 530px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .popular-categories {
+    width: 100% !important;
+    padding: 20px;
+    order: 2; /* Place popular categories below the product images */
+  }
+
+  .categories-imgs {
+    width: 100%;
+    order: 1; /* Place product images above popular categories */
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .view-products {
+    max-width: 100%; /* Allow full width for products on mobile */
+    margin-bottom: 20px; /* Add space between products */
+  }
+
+  .view-products img {
+    height: auto; /* Adjust height proportionally */
+    width: 100%; /* Make image take full width */
+  }
+
+  .popular-categories-heading {
+    text-align: center;
+  }
+
+  .view-categories-btn button {
+    width: 100%;
+  }
+}

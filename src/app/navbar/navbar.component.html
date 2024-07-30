@@ -1,0 +1,41 @@
+<div class="main-container">
+  <div class="left-sec">
+    <div class="logo">
+      <span class="bold">EX</span>
+      <span class="bold">ZO</span>
+    </div>
+  </div>
+  <div class="right-sec">
+    <ul>
+      <li>
+        <a (click)="scrollToSection('mainSliderImg')" 
+           [ngClass]="{'active': activeSection === 'mainSliderImg'}" 
+           class="bold black">HOME</a>
+      </li>
+      <li>
+        <a (click)="scrollToSection('bestProducts')" 
+           [ngClass]="{'active': activeSection === 'bestProducts'}" 
+           class="bold black">PRODUCT</a>
+      </li>
+      <li>
+        <a (click)="scrollToSection('collections')" 
+           [ngClass]="{'active': activeSection === 'collections'}" 
+           class="bold black">PAGES</a>
+      </li>
+      <li>
+        <a (click)="scrollToSection('hotOffer')" 
+           [ngClass]="{'active': activeSection === 'hotOffer
+           '}" 
+           class="bold black">GALLERY</a>
+      </li>
+      <li>
+        <a (click)="scrollToSection('blogs')" 
+           [ngClass]="{'active': activeSection === 'blogs'}" 
+           class="bold black">BLOGS</a>
+      </li>
+      <li class="search">
+        <img src="../../assets/search.png" alt="">
+      </li>
+    </ul>
+  </div>
+</div>

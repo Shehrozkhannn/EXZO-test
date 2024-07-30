@@ -1,0 +1,114 @@
+<div class="main-container">
+  <div class="hot-sale">
+    <div class="heading">
+      <span class="sale1">HOT SALE</span>
+    </div>
+    <div class="content" *ngFor="let product of viewProducts">
+      <div class="img">
+        <img [src]="product.image" alt="" />
+      </div>
+      <div class="details">
+        <h3 class="bold">{{ product.title }}</h3>
+        <span>{{ product.price }}</span>
+        <!-- ratings -->
+        <div
+          class="star-rating-container star-rating-animation"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <div
+            *ngFor="let star of product.stars"
+            [ngClass]="[star.class]"
+            (click)="selectStar(star.id, product)"
+          >
+            <mat-icon>{{ star.icon }}</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hot-sale">
+    <div class="heading">
+      <span class="sale1">TOP RATED</span>
+    </div>
+    <div class="content" *ngFor="let product of viewProducts">
+      <div class="img">
+        <img [src]="product.image" alt="" />
+      </div>
+      <div class="details">
+        <h3 class="bold">{{ product.title }}</h3>
+        <span>{{ product.price }}</span>
+        <!-- ratings -->
+        <div
+          class="star-rating-container star-rating-animation"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <div
+            *ngFor="let star of product.stars"
+            [ngClass]="[star.class]"
+            (click)="selectStar(star.id, product)"
+          >
+            <mat-icon>{{ star.icon }}</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hot-sale">
+    <div class="heading">
+      <span class="sale1">POPULAR</span>
+    </div>
+    <div class="content" *ngFor="let product of viewProducts">
+      <div class="img">
+        <img [src]="product.image" alt="" />
+      </div>
+      <div class="details">
+        <h3 class="bold">{{ product.title }}</h3>
+        <span>{{ product.price }}</span>
+        <!-- ratings -->
+        <div
+          class="star-rating-container star-rating-animation"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <div
+            *ngFor="let star of product.stars"
+            [ngClass]="[star.class]"
+            (click)="selectStar(star.id, product)"
+          >
+            <mat-icon>{{ star.icon }}</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hot-sale">
+    <div class="heading">
+      <span class="sale1">BEST CHOICE</span>
+    </div>
+    <div class="content" *ngFor="let product of viewProducts">
+      <div class="img">
+        <img [src]="product.image" alt="" />
+      </div>
+      <div class="details">
+        <h3 class="bold">{{ product.title }}</h3>
+        <span>{{ product.price }}</span>
+        <!-- ratings -->
+        <div
+          class="star-rating-container star-rating-animation"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <div
+            *ngFor="let star of product.stars"
+            [ngClass]="[star.class]"
+            (click)="selectStar(star.id, product)"
+          >
+            <mat-icon>{{ star.icon }}</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

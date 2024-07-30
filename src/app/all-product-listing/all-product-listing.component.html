@@ -1,0 +1,24 @@
+<div class="filter">
+  <h1>Filter The Products</h1>
+  <label id="example-radio-group-label">Filter By Categories</label>
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="product"
+  (change)="onRadioChange($event)"
+  >
+  @for (season of filters; track season) {
+    <mat-radio-button class="example-radio-button" [value]="season">{{season}}</mat-radio-button>
+  }
+</mat-radio-group>
+</div>
+<div class="products-container">
+  <div class="categories-imgs">
+    <div class="view-products border" *ngFor="let product of productListing">
+       <img [src]="product.image">
+       <h3 class="bold">{{product.title}}</h3>
+       <p class="grey-font-size">{{product.description}}</p>
+       <span>{{product.price}}</span>
+    </div>
+   </div>
+</div>
