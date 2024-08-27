@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bold{
+  font-weight: 900 !important;
+}
+
+.black{
+  color: #000;
+}
+
+.white{
+  color: #fff;
+}
+
+.grey-font-size{
+  color: #959494;
+  font-size: 15px;
+  margin-left: 6px;
+}
+
+.border{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+
+.top-nav-padding{
+    padding: 0px 23px;
+}
+
+.active{
+  background-color: #b1cd02;
+  padding: 10px 23px;
+  border-radius: 25px;
+  color: #fff;
+}
+
+.light-green{
+  color: #b1cd02;
+}
+
+html {
+  scroll-behavior: smooth;
+}

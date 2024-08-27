@@ -1,0 +1,79 @@
+.main-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .images-section{
+    display: flex;
+    justify-content: center;
+    .img-width{
+      width: 27%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .mid{
+        margin-bottom: 18px;
+        span{
+          margin-right: 12px;
+        }
+      }
+      h2{
+        text-align: center;
+        margin-top: 15px;
+        font-size: 18px;
+        width: 97%;
+      }
+    }
+  }
+    .heading{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      h1{
+        font-size: 36px;
+        font-weight: bolder;
+        margin: 20px 0px
+      }
+      h1:after{
+        content: ""; /* This is necessary for the pseudo element to work. */ 
+        display: block; /* This will put the pseudo element on its own line. */
+        margin: 0 auto; /* This will center the border. */
+        width: 32%; /* Change this to whatever width you want. */
+        padding-top: 13px; /* This creates some space between the element and the border. */
+        border-bottom: 2px solid #b1cd02;
+      }
+    }
+  }
+
+  img{
+    height: 243px;
+    width: 342px;
+  }
+
+  @media (max-width: 530px) {
+    .img-width {
+      width: 100%; /* Full width on smaller screens */
+      margin-bottom: 20px; /* Added margin-bottom for spacing between items */
+    }
+    .heading h1 {
+      font-size: 28px !important; /* Adjusted font-size for smaller screens */
+    }
+    .heading h1:after {
+      width: 50%; /* Adjusted width for responsiveness */
+    }
+    img {
+      height: 68px; /* Auto height for responsiveness */
+      width: 100%; /* Full width for responsiveness */
+    }
+    h2{
+      font-size: 14px !important;
+    }
+    .mid{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    b{
+      font-size: 11px !important;
+    }
+  }

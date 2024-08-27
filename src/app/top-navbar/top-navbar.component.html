@@ -1,0 +1,35 @@
+<div class="main-container">
+  <div class="left-section">
+    <div class="top-nav-padding border">
+      <span class="bold">CONTACT US</span>
+      <span class="grey-font-size">+9232627920</span>
+    </div>
+    <div class="top-nav-padding border">
+      <span class="bold">EMAIL</span>
+      <span class="grey-font-size">sharozekkhangmail.com</span>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="top-nav-padding border">
+      <span class="bold">LOGIN</span>
+      <b class="or">OR</b>
+      <span class="bold">REGISTER</span>
+    </div>
+    <div class="country top-nav-padding">
+      <img src="../../assets/united-states.png" alt="">
+      <span class="bold">USD</span>
+    </div>
+    <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked"
+    
+    >
+      <img src="../../assets/like.png" alt="" [ngClass]="{'light-green': isLiked === true}">
+    </div>
+    <div class="refresh-icon top-nav-padding border" (click)="refreshComponent()">
+      <img src="../../assets/refresh.png" alt="">
+    </div>
+    <div class="my-card cart top-nav-padding border">
+      <span class="bold">MY CART</span>
+      <mat-icon [matBadge]= currentCount matBadgeColor="warn">add_shopping_cart</mat-icon>
+    </div>
+  </div>
+</div>

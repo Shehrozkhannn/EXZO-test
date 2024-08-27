@@ -1,0 +1,141 @@
+.main-container{
+  display: flex;
+  height: 500px;
+  justify-content: space-around;
+  margin-top: 80px;
+  padding: 0px 57px;
+  .hot-sale{
+    .heading{
+      margin-bottom: 35px;
+    }
+    .content{
+      display: flex;
+      .img{
+        margin-right: 28px;
+        img{
+          height: 102px;
+          width: 99px;
+        }
+      }
+      .details{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h3{
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+  .sale{
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 20px 0px
+  }
+  .sale:after{
+    content: "";
+    display: block;
+    margin: 0 19px;
+    width: 54%;
+    padding-top: 30px;
+    border-bottom: 2px solid #b1cd02;
+  }
+  .sale1{
+    font-size: 28px;
+    font-weight: bolder;
+    margin: 20px 0px
+  }
+  .sale1:after{
+    content: "";
+    display: block;
+    margin: 0 19px;
+    width: 24%;
+    padding-top: 30px;
+    border-bottom: 2px solid #b1cd02;
+  }
+
+img{
+  height: 140px;
+  width: 147px;
+}
+
+//STARS RATING STYLING
+.star{
+  margin: 0px -8px;
+  color: #a9a5a5;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .3s;
+  transform: scale(1);
+}
+.star-rating-container{
+  margin-top: 9px;
+}
+.star .mat-icon{
+    width: 40px;
+    height: 40px;
+}
+.star-gold{
+  color: orange;
+}
+
+/* make all stars orange*/
+.star-rating-animation:hover .star-hover{
+  color: orange;
+}
+/* make all stars right from selected gray*/
+.star-rating-animation .star-hover:hover ~ .star-hover{
+  color: #ddd;
+}
+.star-rating-animation .star-hover:hover{
+  transform: scale(1.3);
+}
+
+//MOBILE RESPONSIVNESS
+@media (max-width: 530px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+    padding: 0 10px;
+  }
+  .hot-sale {
+    margin-bottom: 20px;
+    .heading {
+      text-align: center;
+      span {
+        font-size: 24px;
+      }
+    }
+    .content {
+      flex-direction: column;
+      align-items: center;
+      .img {
+        margin-bottom: 10px;
+        img {
+          height: auto;
+          width: 100%; 
+        }
+      }
+      .details {
+        align-items: center; 
+        text-align: center;
+        h3 {
+          font-size: 16px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .star .mat-icon {
+    width: 30px;
+    height: 30px; 
+  }
+  .sale1:after{
+    margin: 0px auto !important;
+    
+  }
+}

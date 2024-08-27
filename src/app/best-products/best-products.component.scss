@@ -1,0 +1,105 @@
+.heading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  h1{
+    font-size: 36px;
+    font-weight: bolder;
+    margin: 20px 0px
+  }
+}
+.categories-imgs{
+  display: flex;
+  flex-wrap: wrap;
+  .view-products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 35px;
+    width: 25%;
+    p{
+      margin: 0px 26px;
+    }
+    span{
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    img{
+      height: 243px;
+      width: 260px;
+    }
+  }
+}
+//STARS RATING STYLING
+.star{
+  margin: 0px 0px;
+  color: #a9a5a5;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .3s;
+  transform: scale(1);
+}
+.star .mat-icon{
+    width: 40px;
+    height: 40px;
+}
+.star-gold{
+  color: orange;
+}
+.view-categories-btn{
+  display: flex;
+  justify-content: center;
+  margin: 64px 0px;
+  button{
+    height: 44px;
+    border-radius: 27px;
+    width: 175px;
+    border: none;
+    background: #b1cd02;
+    cursor: pointer;
+    }
+}
+
+/* make all stars orange*/
+.star-rating-animation:hover .star-hover{
+  color: orange;
+}
+/* make all stars right from selected gray*/
+.star-rating-animation .star-hover:hover ~ .star-hover{
+  color: #ddd;
+}
+.star-rating-animation .star-hover:hover{
+  transform: scale(1.3);
+}
+
+@media (max-width: 530px) {
+  .heading {
+    margin-top: 30px;
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .categories-imgs {
+    .view-products {
+      width: 100%;
+      padding: 0 10px; /* Added padding for better spacing */
+      img {
+        height: auto;
+        width: 100%;
+      }
+      p {
+        margin: 10px 0;
+      }
+    }
+  }
+
+  .view-categories-btn {
+    margin: 32px 0px;
+    button {
+      width: 100%;
+    }
+  }
+}

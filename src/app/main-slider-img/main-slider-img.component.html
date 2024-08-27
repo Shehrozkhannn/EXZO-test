@@ -1,0 +1,23 @@
+<div class="slider-container">
+  <ngx-slick-carousel class="carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide"
+    [ngStyle]="{'background': slide.backgroundColor}"
+    [ngClass]="customStyles"
+    >
+      <div class="slide-content">
+        <h2>{{ slide.description }}</h2>
+        <p>In feugiat molestie tortor a malesuada. Donec vel urna felis. Proin placerat.</p>
+        <ul>
+          <li>50 hours of high quality music</li>
+          <li>Perfect sound</li>
+          <li>It works quite literally</li>
+        </ul>
+        <div class="buttons">
+          <button class="learn-more" (click)="learnMore()">Learn More</button>
+          <button class="add-to-cart" (click)="addtoCart()">Add to Cart</button>
+        </div>
+      </div>
+      <img [src]="slide.image" class="slide-image">
+    </div>
+  </ngx-slick-carousel>
+</div>

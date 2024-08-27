@@ -1,0 +1,48 @@
+<div class="main-container">
+  <div class="popular-categories">
+    <span class="popular-categories-heading">POPULAR CATEGORIES</span>
+    <ul>
+      <li>
+        <b>18</b>
+        <span>{{ 'MODERN EDITION' }}</span>
+      </li>
+      <li>
+        <b>7</b>
+        <span>{{ 'PROFESSIONAL EDITION' }}</span>
+      </li>
+      <li>
+        <b>88</b>
+        <span>{{ 'COLOR EDITION' }}</span>
+      </li>
+      <li>
+        <b>79</b>
+        <span>{{'SPORT EDITION'}}</span>
+      </li>
+      <li>
+        <b>99</b>
+        <span>{{'CLASSIC EDITION'}}</span>
+      </li>
+      <li>
+        <b>09</b>
+        <span>{{'PROGESSIVE EDITION'}}</span>
+      </li>
+    </ul>
+    <div class="view-categories-btn">
+      <button class="white" (click)="allCategories()">VIEW ALL CATEGORIES</button>
+    </div>
+  </div>
+  <div class="categories-imgs">
+   <div class="view-products border" *ngFor="let product of viewProducts">
+      <img [src]="product.image">
+      <h3 class="bold">{{product.title}}</h3>
+      <!-- ratings -->
+      <div class="star-rating-container star-rating-animation" fxLayout="row" fxLayoutAlign="start center" >
+        <div *ngFor="let star of product.stars" [ngClass]="[star.class]" (click)="selectStar(star.id, product)">
+            <mat-icon>{{star.icon}}</mat-icon>
+        </div>
+      </div>
+      <p class="grey-font-size">{{product.description}}</p>
+      <span>{{product.price}}</span>
+   </div>
+  </div>
+</div>
