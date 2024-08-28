@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class OverallCategoriesComponent {
   viewProducts = [
     {
-      image: '../../assets/headphone-product.png',
+      image: 'assets/headphone-product.png',
       title: 'HEADPHONE SAMPLE',
       rating: 0,
       stars: [
@@ -46,7 +46,7 @@ export class OverallCategoriesComponent {
       price: '$110.00'
     },
     {
-      image: '../../assets/apple-airpods.webp',
+      image: 'assets/apple-airpods.webp',
       title: 'APPLE AIRPODS SAMPLE',
       rating: 0,
       stars: [
@@ -80,7 +80,7 @@ export class OverallCategoriesComponent {
       price: '$90.00'
     },
     {
-      image: '../../assets/powerbank.png',
+      image: 'assets/powerbank.png',
       title: 'SAMSUMG POWER BANK SAMPLE',
       rating: 0,
       stars: [
