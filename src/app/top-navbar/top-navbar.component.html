@@ -1,27 +1,48 @@
-<div class="main-container">
+<!-- before login or signup  -->
+<div class="main-container" *ngIf="!isUserLoggedIn && userData">
   <div class="left-section">
     <div class="top-nav-padding border">
       <span class="bold">CONTACT US</span>
-      <span class="grey-font-size">+9232627920</span>
+      <span class="grey-font-size">+3467913411</span>
     </div>
     <div class="top-nav-padding border">
       <span class="bold">EMAIL</span>
-      <span class="grey-font-size">sharozekkhangmail.com</span>
+      <span class="grey-font-size">exzogmail.com</span>
     </div>
   </div>
   <div class="right-section">
     <div class="top-nav-padding border">
-      <span class="bold">LOGIN</span>
+      <span class="bold" (click)="login()">LOGIN</span>
       <b class="or">OR</b>
-      <span class="bold">REGISTER</span>
+      <span class="bold" (click)="register()">REGISTER</span>
     </div>
+    <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked">
+      <img src="assets/like.png" alt="" [ngClass]="{'light-green': isLiked === true}">
+    </div>
+    <div class="refresh-icon top-nav-padding border" (click)="refreshComponent()">
+      <img src="assets/refresh.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- AFTER LOGIN -->
+<div class="main-container" *ngIf="isUserLoggedIn">
+  <div class="left-section">
+    <div class="top-nav-padding border">
+      <span class="bold">USER</span>
+      <span class="grey-font-size" *ngIf="userData">{{userData?.firstName + ' ' +userData?.lastName}}</span>
+    </div>
+    <div class="top-nav-padding border">
+      <span class="bold">EMAIL</span>
+      <span class="grey-font-size" *ngIf="userData">{{userData?.email}}</span>
+    </div>
+  </div>
+  <div class="right-section">
     <div class="country top-nav-padding">
       <img src="assets/united-states.png" alt="">
       <span class="bold">USD</span>
     </div>
-    <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked"
-    
-    >
+    <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked">
       <img src="assets/like.png" alt="" [ngClass]="{'light-green': isLiked === true}">
     </div>
     <div class="refresh-icon top-nav-padding border" (click)="refreshComponent()">
@@ -32,4 +53,10 @@
       <mat-icon [matBadge]= currentCount matBadgeColor="warn">add_shopping_cart</mat-icon>
     </div>
   </div>
+  <div class="logout-btn">
+    <button (click)="logout()">LOGOUT</button>
+  </div>
 </div>
+
+
+

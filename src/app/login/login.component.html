@@ -1,0 +1,47 @@
+<div class="login-container">
+  <div class="login-box">
+    <div class="top-sec">
+      <div class="logo">
+        <span class="bold">EX</span>
+        <span class="bold">ZO</span>
+      </div>
+      <div class="login-text">
+        <h1>L<b>O</b>GI<b>N</b></h1>
+      </div>
+    </div>
+    <div class="bottom-sec">
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+        <div class="input-1">
+          <label for="">Email</label>
+          <input formControlName='email' type="text">
+          <div *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
+            <span class="error" *ngIf="loginForm.controls.email.errors?.required">
+              Email is required
+            </span>
+            <span class="error" *ngIf="loginForm.controls.email.errors?.email">
+              Enter a valid email
+            </span>
+          </div>
+        </div>
+        <div class="input-2">
+          <label for="">Password</label>
+          <input formControlName="password" type="password">
+          <div *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+            <span class="error" *ngIf="loginForm.controls.password.errors?.required">Password is required</span>
+            <span class="error" *ngIf="loginForm.controls.password.errors?.minlength">Password must be greater than 6.</span>
+          </div>
+        </div>
+        <div class="login-btn">
+          <button type="submit" [disabled]="loginForm.invalid">LOGIN</button>
+        </div>
+      </form>
+    </div>
+    <div class="no-acc">
+        <span>Dont Have Account?</span>&nbsp;
+        <span (click)="navigateToSignup()"> Sign up</span>
+    </div>
+  </div>
+  <div class="spinner" *ngIf="loginSuccess">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

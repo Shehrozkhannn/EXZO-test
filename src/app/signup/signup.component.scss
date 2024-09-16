@@ -1,0 +1,97 @@
+.signup-container{
+  height: 100vh;
+  background: linear-gradient(90deg, rgba(177,205,2,1) 46%, rgba(13,224,185,1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .signup-box{
+    width: 350px;
+    background: white;
+    border-radius: 10px;
+    padding: 11px 30px;
+    position: relative;
+    .top-sec{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .signup-text{
+        padding-top: 10px;
+        h1{
+          font-size: 32px;
+        }
+      }
+      
+    }
+    .bottom-sec{
+      input{
+        height: 30px;
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc; /* Default border */
+        border-radius: 5px;/* Optional: Add some border radius */
+        outline: none; /* Remove default outline */
+      }
+      input:focus {
+        outline: none; /* Remove the default browser outline */
+        border: 2px solid rgb(124, 219, 124) !important; /* Increase specificity */
+        box-shadow: 0 0 2px rgb(81, 128, 0); /* Optional: add a green glow to highlight focus */
+      }
+      .signup-btn{
+        height: 96px;
+        display: flex;
+        align-items: center;
+        button{
+          height: 45px;
+          width: 100%;
+          border-radius: 23px;
+          color: white;
+          background: linear-gradient(90deg, rgba(177,205,2,1) 46%, rgba(13,224,185,1) 100%);
+          border: none;
+          cursor: pointer;
+          &:disabled{
+            background: #bebcbcba;
+            cursor:not-allowed;
+          }
+        }
+      }
+      .input{
+        span{
+          font-size: 10px;
+        }
+      }
+    }
+    .no-acc{
+      display: flex;
+      align-items: end;
+      font-size: 11px;
+      &:hover{
+        color: rgb(155, 182, 113);
+        cursor: pointer;
+      }
+    }
+
+  }
+  .spinner{
+    position: absolute;
+  }
+}
+
+
+.logo{
+  width: 50px;
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7px 0px;
+  span{
+    font-size: 20px;
+  }
+}
+b{
+  color: rgba(177,205,2,1)
+}
+// .toast-success{
+//   background-color: rgba(177,205,2,1) !important;
+//   color: white ;
+// }

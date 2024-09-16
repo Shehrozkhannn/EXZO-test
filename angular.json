@@ -19,7 +19,6 @@
           "options": {
             "outputPath": "dist/exzo",
             "index": "src/index.html",
-            "baseHref": "/EXZO-test/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"

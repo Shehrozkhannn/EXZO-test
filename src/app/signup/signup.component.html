@@ -1,0 +1,77 @@
+<div class="signup-container">
+  <div class="signup-box">
+    <div class="top-sec">
+      <div class="logo">
+        <span class="bold">EX</span>
+        <span class="bold">ZO</span>
+      </div>
+      <div class="signup-text">
+        <h1>S<b>I</b>G<b>N</b> UP</h1>
+      </div>
+    </div>
+    <div class="bottom-sec">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
+        <div class="input">
+          <label for="">First Name</label>
+          <input type="text" formControlName="firstName" >
+          <div *ngIf="signUpForm.controls.firstName.invalid && signUpForm.controls.firstName.touched">
+            <span class="error" *ngIf="signUpForm.controls.firstName.errors?.required">First name is required</span>
+          </div>
+        </div>
+        <div class="input">
+          <label for="">Last Name</label>
+          <input type="text" formControlName="lastName">
+          <div *ngIf="signUpForm.controls.lastName.invalid && signUpForm.controls.lastName.touched">
+            <span class="error" *ngIf="signUpForm.controls.lastName.errors?.required">Last name is required</span>
+          </div>
+        </div>
+        <div class="input">
+          <label for="">Email</label>
+          <input type="text" formControlName="email">
+          <div *ngIf="signUpForm.controls.email.invalid && signUpForm.controls.email.touched">
+            <span class="error" *ngIf="signUpForm.controls.email.errors?.required">Email is required</span>
+            <span class="error" *ngIf="signUpForm.controls.email.errors?.email">Email is invalid</span>
+          </div>
+        </div>
+        <div class="input">
+          <label for="">Phone Number</label>
+          <input type="text" formControlName="phone">
+          <div *ngIf="signUpForm.controls.phone.invalid && signUpForm.controls.phone.touched">
+            <span class="error" *ngIf="signUpForm.controls.phone.errors?.required">phone is required</span>
+            <span class="error" *ngIf="signUpForm.controls.phone.errors?.pattern">You can only enter in digits</span>
+            <span class="error" *ngIf="signUpForm.controls.phone.errors?.minlength || signUpForm.controls.phone.errors?.maxlength">Phone number must be of 11 digits</span>
+          </div>
+        </div>
+        <div class="input">
+          <label for="">Password</label>
+          <input type="text" formControlName="password">
+          <div *ngIf="signUpForm.controls.password.invalid && signUpForm.controls.password.touched">
+            <span class="error" *ngIf="signUpForm.controls.password.errors?.required">password is required</span>
+            <span class="error" *ngIf="signUpForm.controls.password.errors?.minlength">password must be greater than 6 digits</span>
+          </div>
+        </div>
+        <div class="input">
+          <label for="">Confirm Password</label>
+          <input type="text" formControlName="confirmPassword">
+          <div *ngIf="signUpForm.controls.confirmPassword.invalid && signUpForm.controls.confirmPassword.touched">
+            <span class="error" *ngIf="signUpForm.controls.confirmPassword.errors?.required">confirm password is required</span>
+            <span class="error" *ngIf="signUpForm.controls.confirmPassword.errors?.minlength">password must be greater than 6 digits</span>
+          </div>
+        </div>
+        <div *ngIf="signUpForm.errors?.mismatch && signUpForm.controls.confirmPassword.touched">
+          <span class="error">Passwords do not match</span>
+        </div>
+        <div class="signup-btn">
+          <button type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+        </div>
+      </form>
+    </div>
+    <div class="no-acc">
+        <span (click)="navigateToSignin()">Already Have An Account?</span>
+    </div>
+  </div>
+  <div class="spinner" *ngIf="signupPostSuccess">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+

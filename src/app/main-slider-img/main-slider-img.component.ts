@@ -34,12 +34,12 @@ slides = [
     image: 'assets/string.png',
   }
 ];
-slideConfig = {
-  infinite: true,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  arrows: true
-};
+// slideConfig = {
+//   infinite: true,
+//   autoplay: true,
+//   autoplaySpeed: 2000,
+//   arrows: true
+// };
 get customStyles() {
   return this.variant === 'second' ? 'custom-styles-for-second-slider' : '';
 }
