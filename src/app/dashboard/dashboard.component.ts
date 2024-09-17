@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BestProductsComponent } from '../best-products/best-products.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { CollectionsComponent } from '../collections/collections.component';
@@ -39,296 +39,296 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   isUserLoggedIn: User | null = null;
   userData: DocumentData | null = null;
   uid:any;
   authChecked: boolean = false;
   getDashboardDataSuccess: boolean = false;
-  viewProducts = [
-    {
-      image: 'assets/headphone-product.png',
-      title: 'HEADPHONE SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  // viewProducts = [
+  //   {
+  //     image: 'assets/headphone-product.png',
+  //     title: 'HEADPHONE SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$110.00'
-    },
-    {
-      image: 'assets/apple-airpods.webp',
-      title: 'APPLE AIRPODS SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$110.00'
+  //   },
+  //   {
+  //     image: 'assets/apple-airpods.webp',
+  //     title: 'APPLE AIRPODS SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'AIRPODS are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$90.00'
-    },
-    {
-      image: 'assets/powerbank.png',
-      title: 'SAMSUMG POWER BANK SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'AIRPODS are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$90.00'
+  //   },
+  //   {
+  //     image: 'assets/powerbank.png',
+  //     title: 'SAMSUMG POWER BANK SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Powerbank are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$210.00'
-    },
-    {
-      image: 'assets/airpods-max-removebg-preview.png',
-      title: 'AIR PODS MAX',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Powerbank are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$210.00'
+  //   },
+  //   {
+  //     image: 'assets/airpods-max-removebg-preview.png',
+  //     title: 'AIR PODS MAX',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$110.00'
-    },
-    {
-      image: 'assets/red.png',
-      title: 'HEADPHONE ULTRA',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$110.00'
+  //   },
+  //   {
+  //     image: 'assets/red.png',
+  //     title: 'HEADPHONE ULTRA',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$1100.00'
-    },
-    {
-      image: 'assets/handsfree-removebg-preview.png',
-      title: 'HANDSFREE SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$1100.00'
+  //   },
+  //   {
+  //     image: 'assets/handsfree-removebg-preview.png',
+  //     title: 'HANDSFREE SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$117.00'
-    },
-    {
-      image: 'assets/mic.png',
-      title: 'MIC SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$117.00'
+  //   },
+  //   {
+  //     image: 'assets/mic.png',
+  //     title: 'MIC SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$180.00'
-    },
-    {
-      image: 'assets/string.png',
-      title: 'STRING SAMPLE',
-      rating: 0,
-      stars: [
-        {
-          id: 1,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 2,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 3,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 4,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        },
-        {
-          id: 5,
-          icon: 'star',
-          class: 'star-gray star-hover star'
-        }
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$180.00'
+  //   },
+  //   {
+  //     image: 'assets/string.png',
+  //     title: 'STRING SAMPLE',
+  //     rating: 0,
+  //     stars: [
+  //       {
+  //         id: 1,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 2,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 3,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 4,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       },
+  //       {
+  //         id: 5,
+  //         icon: 'star',
+  //         class: 'star-gray star-hover star'
+  //       }
     
-      ],
-      description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
-      price: '$160.00'
-    },
-  ];
-
+  //     ],
+  //     description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
+  //     price: '$160.00'
+  //   },
+  // ];
+  viewProducts:any = [];
   productListing  = [
     {
       image: 'assets/headphone-product.png',
@@ -444,6 +444,10 @@ export class DashboardComponent {
     })
   }
 
+  ngOnInit(): void {
+    this.getAllProducts();
+  }
+
   async getUserData() {
     this.getDashboardDataSuccess = true
     try {
@@ -457,5 +461,17 @@ export class DashboardComponent {
       console.error('Error fetching documents:', error);
     }
     this.getDashboardDataSuccess = false;
+  }
+
+  async getAllProducts(){
+    try {
+      const collectionRef = collection(this.firestore, 'Products');
+      const snapshot = await getDocs(collectionRef);
+      snapshot.docs.forEach(doc => {
+        this.viewProducts.push(doc.data());
+      });
+    } catch (error) {
+      console.error('Error fetching documents:', error);
+    }
   }
 }
