@@ -3,10 +3,10 @@
 </div>
 <app-navbar></app-navbar>
 <div style="position: relative;">
+  <div class="spinner" *ngIf="getDashboardDataSuccess" style="position: absolute; display: flex; justify-content: center; align-items: center; width: 100%;z-index: 1; height: 100vh;">
+    <mat-spinner [diameter]="70"></mat-spinner>
+  </div>
   <app-main-slider-img [viewProducts]="viewProducts" id="mainSliderImg"></app-main-slider-img>
-</div>
-<div class="spinner" *ngIf="getDashboardDataSuccess" style="position: absolute; bottom: 219px; left: 600px;">
-  <mat-spinner></mat-spinner>
 </div>
 <app-categories [productListing]="productListing" id="categories"></app-categories>
 <app-collections id="collections"></app-collections>

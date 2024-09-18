@@ -1,5 +1,5 @@
 <!-- before login or signup  -->
-<div class="main-container" *ngIf="!isUserLoggedIn && userData">
+<div class="main-container" *ngIf="!isUserLoggedIn && !userData">
   <div class="left-section">
     <div class="top-nav-padding border">
       <span class="bold">CONTACT US</span>
@@ -26,7 +26,7 @@
 </div>
 
 <!-- AFTER LOGIN -->
-<div class="main-container" *ngIf="isUserLoggedIn">
+<div class="main-container" *ngIf="isUserLoggedIn && userData">
   <div class="left-section">
     <div class="top-nav-padding border">
       <span class="bold">USER</span>

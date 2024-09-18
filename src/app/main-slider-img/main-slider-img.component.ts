@@ -45,7 +45,8 @@ get customStyles() {
 }
 addtoCart(){
   this.dialog.open(AddToCartProductsComponent,{
-    data: this.viewProducts
+    data: this.viewProducts,
+    autoFocus: false,
   });
 }
 
