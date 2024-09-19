@@ -46,7 +46,7 @@ export class OverallCategoriesComponent {
       price: '$110.00'
     },
     {
-      image: 'assets/apple-airpods.webp',
+      image: 'assets/airpods-pro.png',
       title: 'APPLE AIRPODS SAMPLE',
       rating: 0,
       stars: [

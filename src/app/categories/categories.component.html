@@ -33,7 +33,7 @@
   </div>
   <div class="categories-imgs">
    <div class="view-products border" *ngFor="let product of viewProducts">
-      <img [src]="product.image">
+      <img [src]="product.image" loading="lazy">
       <h3 class="bold">{{product.title}}</h3>
       <!-- ratings -->
       <div class="star-rating-container star-rating-animation" fxLayout="row" fxLayoutAlign="start center" >

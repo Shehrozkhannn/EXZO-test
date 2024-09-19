@@ -42,7 +42,7 @@ import { DataService } from '../data.service';
 })
 export class DashboardComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
-  isUserLoggedIn: User | null = null;
+  isUserLoggedIn: any = {status: null};
   userData: DocumentData | null = null;
   uid:any;
   authChecked: boolean = false;
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
       type: 'modern'
     },
     {
-      image: 'assets/apple-airpods.webp',
+      image: 'assets/airpods-pro.png',
       title: 'APPLE AIRPODS SAMPLE',
       description:'AIRPODS are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$90.00',
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
       type: 'modern'
     },
     {
-      image: 'assets/airpods-max-removebg-preview.png',
+      image: 'assets/airpods-pro.png',
       title: 'AIR PODS MAX',
       description:'Headphones are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$110.00',
@@ -119,28 +119,28 @@ export class DashboardComponent implements OnInit {
       type: 'modern'
     },
     {
-      image: 'assets/red-airpods.webp',
+      image: 'assets/cherry-pods.png',
       title: 'Cherry Airpods',
       description:'Cherry Airpods are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$160.00',
       type: 'modern'
     },
     {
-      image: 'assets/purple-bank.jpeg',
+      image: 'assets/purple-bank.png',
       title: 'Purple PowerBank',
       description:'Power Bank are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$160.00',
       type: 'modern'
     },
     {
-      image: 'assets/pink-bank.jpeg',
+      image: 'assets/pink-bank.png',
       title: 'Pink PowerBank',
       description:'Pink Bank are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$190.00',
       type: 'sport'
     },
     {
-      image: 'assets/purple-airpod.jpeg',
+      image: 'assets/purple-max.png',
       title: 'Purple Airpod',
       description:'Pink Bank are electronic audio device that people wear over their ears. They let people hear sounds on a walkman, MP3 player, mobile phone or computer',
       price: '$190.00',
@@ -153,11 +153,11 @@ export class DashboardComponent implements OnInit {
     this.auth.onAuthStateChanged((user)=> {
       console.log(user);
       if(user){
-        this.isUserLoggedIn = user;
-        this.uid = user.uid
+        this.uid = user.uid;
+        this.isUserLoggedIn.status = 'login';
         this.getUserData();
       } else {
-        this.isUserLoggedIn = null;
+        this.isUserLoggedIn.status = 'logout';
         this.getDashboardDataSuccess = false;
       }
       this.authChecked = true; 

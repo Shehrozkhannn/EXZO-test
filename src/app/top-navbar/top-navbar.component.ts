@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import { DataService } from '../data.service';
@@ -14,7 +14,7 @@ import { Auth, User } from '@angular/fire/auth';
   styleUrl: './top-navbar.component.scss'
 })
 export class TopNavbarComponent {
-  @Input() isUserLoggedIn:User | null = null;
+  @Input() isUserLoggedIn:any = {status: null};
   @Input() userData:any;
   currentCount:any;
   isLiked:boolean = false;
@@ -26,7 +26,6 @@ export class TopNavbarComponent {
       count => this.currentCount = count
     );
   }
-
 
   refreshComponent(){
     window.location.reload();

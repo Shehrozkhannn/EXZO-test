@@ -6,7 +6,7 @@
   <div class="products-container">
     <div class="categories-imgs">
       <div class="view-products border" *ngFor="let product of viewProducts">
-         <img [src]="product.imageUrl">
+         <img [src]="product.imageUrl" loading="lazy">
          <h3 class="bold">{{product?.productName}}</h3>
          <!-- ratings -->
          <div class="star-rating-container star-rating-animation" fxLayout="row" fxLayoutAlign="start center" >
