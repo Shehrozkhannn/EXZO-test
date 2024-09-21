@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>ITEMS IN THE CART</h2>
+<div class="container">
+  <div class="cart-price">
+    <div class="cart-icon-text">
+      <img src="" alt="">
+      <span> Your Cart</span>
+    </div>
+    <div class="price">
+      <span>{{'$110.00'}}</span>
+    </div>
+  </div>
+  <div class="cart-items-section" *ngFor="let item of cartItems">
+    <div class="left-section">
+      <div class="cart-img">
+        <img [src]="item.image" alt="">
+      </div>
+      <div class="title-price">
+        <h3>{{item.title}}</h3>
+        <span>{{item.price}}</span>
+      </div>
+    </div>
+    <div class="right-section">
+      <span>{{item.quantity}}</span>
+    </div>
+  </div>
+</div>

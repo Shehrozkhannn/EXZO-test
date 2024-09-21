@@ -1,0 +1,23 @@
+::ng-deep .cdk-global-overlay-wrapper{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: unset !important;
+  top: 60px !important;
+  left: 510px !important;
+}
+
+.container{
+  width: 600px !important;
+  padding: 0px 30px 30px 30px;
+  .cart-price{
+    display: flex;
+    justify-content: space-between;
+  }
+  .cart-items-section{
+    display: flex;
+    justify-content: space-between;
+    .left-section{
+      display: flex;
+    }
+  }
+}

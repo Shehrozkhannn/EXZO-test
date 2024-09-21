@@ -49,9 +49,9 @@
       <div class="refresh-icon top-nav-padding border" (click)="refreshComponent()">
         <img src="assets/refresh.png" alt="">
       </div>
-      <div class="my-card cart top-nav-padding border">
+      <div class="my-card cart top-nav-padding border" (click)="showAddToCartItems()">
         <span class="bold">MY CART</span>
-        <mat-icon [matBadge]= currentCount matBadgeColor="warn" aria-hidden="false">add_shopping_cart</mat-icon>
+        <mat-icon class="cursor-pointer" [matBadge]= currentCount matBadgeColor="warn" aria-hidden="false">add_shopping_cart</mat-icon>
       </div>
     </div>
     <div class="logout-btn">

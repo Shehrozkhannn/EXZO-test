@@ -5,6 +5,8 @@ import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth, User } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
+import { ItemsProgressCartComponent } from '../items-progress-cart/items-progress-cart.component';
 
 @Component({
   selector: 'app-top-navbar',
@@ -18,7 +20,7 @@ export class TopNavbarComponent {
   @Input() userData:any;
   currentCount:any;
   isLiked:boolean = false;
-  constructor(private dataService: DataService, private router: Router, private auth: Auth){
+  constructor(private dataService: DataService, private router: Router, private auth: Auth,public dialog: MatDialog){
 
   }
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class TopNavbarComponent {
 
   register(){
     this.router.navigate(['/signup'])
+  }
+  
+  showAddToCartItems(){
+    this.dialog.open(ItemsProgressCartComponent);
   }
 
 }
