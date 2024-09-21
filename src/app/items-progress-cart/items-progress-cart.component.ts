@@ -14,25 +14,25 @@ export class ItemsProgressCartComponent {
 
   cartItems = [
     {
-      image: '',
-      title: 'Cap',
+      image: '../../assets/powerbank.png',
+      title: 'PowerBank',
       price: '$18.00',
       quantity: 1
     },
     {
-      image: '',
+      image: '../../assets/powerbank.png',
       title: 'Sports',
       price: '$18.00',
       quantity: 6
     },
     {
-      image: '',
+      image: '../../assets/powerbank.png',
       title: 'Trouser',
       price: '$18.00',
       quantity: 1
     },
     {
-      image: '',
+      image: '../../assets/powerbank.png',
       title: 'Laptop',
       price: '$18.00',
       quantity: 1
