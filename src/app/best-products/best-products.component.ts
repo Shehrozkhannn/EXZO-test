@@ -5,6 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { DataService } from '../data.service';
 import { AllProductListingComponent } from '../all-product-listing/all-product-listing.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-best-products',
@@ -20,7 +21,8 @@ export class BestProductsComponent {
    @Output() newItemEvent = new EventEmitter<number>();
    productCount:number= 0;
 
-  constructor(private _snackBar: MatSnackBar, private dataService: DataService,public dialog: MatDialog) {}
+  constructor(private _snackBar: MatSnackBar, private dataService: DataService,public dialog: MatDialog,private auth: Auth) {
+}
   selectStar(value:any, product:any): void{
     // prevent multiple selection
       product.stars.filter( (star: any) => {
