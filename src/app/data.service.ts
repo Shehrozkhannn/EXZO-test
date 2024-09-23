@@ -20,7 +20,9 @@ export class DataService {
     try {
       const collectionRef = collection(this.firestore, 'Products');
       const snapshot = await getDocs(collectionRef);
-      this.viewProducts= snapshot.docs.map(doc => doc.data());
+      this.viewProducts= snapshot.docs.map(doc => {
+        return {id: doc.id, ...doc.data()}
+      });
       return this.viewProducts;
     } catch (error) {
       console.error('Error fetching documents:', error);

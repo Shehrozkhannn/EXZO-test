@@ -17,7 +17,7 @@
          <p class="grey-font-size">{{product.description}}</p>
          <span>{{product.price + '$'}}</span>
          <div class="view-categories-btn" *ngIf="isPopup">
-          <button class="white" (click)="addProductToCart()">ADD TO CART</button>
+          <button class="white" (click)="addProductToCart(product)">ADD TO CART</button>
         </div>
       </div>
      </div>

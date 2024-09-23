@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { DataService } from '../data.service';
 import { AllProductListingComponent } from '../all-product-listing/all-product-listing.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Auth } from '@angular/fire/auth';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-best-products',
@@ -17,14 +18,20 @@ import { Auth } from '@angular/fire/auth';
 export class BestProductsComponent {
    @Input() productListing:any
    @Input() viewProducts: any;
+   firestore: any = inject(Firestore);
    @Input() isPopup:any;
    @Output() newItemEvent = new EventEmitter<number>();
    productCount:number= 0;
+   userId:any = '';
 
   constructor(private _snackBar: MatSnackBar, private dataService: DataService,public dialog: MatDialog,private auth: Auth) {
+    this.auth.onAuthStateChanged((user)=> {
+      console.log('BEST--->',user)
+      this.userId = user?.uid;
+      
+    })
 }
   selectStar(value:any, product:any): void{
-    // prevent multiple selection
       product.stars.filter( (star: any) => {
         if ( star.id <= value){
           star.class = 'star-gold star';
@@ -36,13 +43,24 @@ export class BestProductsComponent {
     product.rating = value;
   }
 
-  addProductToCart(){
+  async addProductToCart(productData:any){
+    console.log(this.viewProducts)
     this.productCount = this.productCount + 1
     this._snackBar.open('Product added to cart', 'Undo', {
       duration: 3000
     });
     this.dataService.updateProductCount(this.productCount);
-    // this.newItemEvent.emit(this.productCount)
+    //FIREBASE
+    try {
+      // Reference to the user's cart in Firestore
+      const cartRef = doc(this.firestore, 'Users', this.userId, 'cart', productData.id);
+      // Set product data in the user's cart
+      await setDoc(cartRef, productData, { merge: true });
+      console.log('Product added to cart');
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+    
   }
 
   allCategories(){
