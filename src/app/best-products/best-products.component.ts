@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { AllProductListingComponent } from '../all-product-listing/all-product-listing.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-best-products',
@@ -50,12 +50,9 @@ export class BestProductsComponent {
       duration: 3000
     });
     this.dataService.updateProductCount(this.productCount);
-    //FIREBASE
     try {
-      // Reference to the user's cart in Firestore
-      const cartRef = doc(this.firestore, 'Users', this.userId, 'cart', productData.id);
-      // Set product data in the user's cart
-      await setDoc(cartRef, productData, { merge: true });
+      const cartRef = collection(this.firestore, 'AddedCartItems');
+      await addDoc(cartRef, {userId :this.userId, ...productData});
       console.log('Product added to cart');
     } catch (error) {
       console.error('Error adding product to cart:', error);
