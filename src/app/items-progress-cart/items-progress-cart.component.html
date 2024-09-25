@@ -12,15 +12,15 @@
   <div class="cart-items-section" *ngFor="let item of cartItems">
     <div class="left-section">
       <div class="cart-img">
-        <img [src]="item.image" alt="" height="60" width="60">
+        <img [src]="item?.imageUrl" alt="" height="60" width="60">
       </div>
       <div class="title-price">
-        <h3>{{item.title}}</h3>
-        <span>{{item.price}}</span>
+        <h3>{{item?.productName}}</h3>
+        <span>{{item?.price + '$'}}</span>
       </div>
     </div>
     <div class="right-section">
-      <span>{{item.quantity}}</span>
+      <span>{{item.quantity || '1'}}</span>
     </div>
   </div>
 </div>

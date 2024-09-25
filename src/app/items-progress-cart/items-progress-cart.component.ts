@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-items-progress-cart',
@@ -10,33 +11,42 @@ import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } fr
   templateUrl: './items-progress-cart.component.html',
   styleUrl: './items-progress-cart.component.scss'
 })
-export class ItemsProgressCartComponent {
+export class ItemsProgressCartComponent implements OnInit {
+  cartItems: any = [];
 
-  cartItems = [
-    {
-      image: '../../assets/powerbank.png',
-      title: 'PowerBank',
-      price: '$18.00',
-      quantity: 1
-    },
-    {
-      image: '../../assets/powerbank.png',
-      title: 'Sports',
-      price: '$18.00',
-      quantity: 6
-    },
-    {
-      image: '../../assets/powerbank.png',
-      title: 'Trouser',
-      price: '$18.00',
-      quantity: 1
-    },
-    {
-      image: '../../assets/powerbank.png',
-      title: 'Laptop',
-      price: '$18.00',
-      quantity: 1
-    }
-  ]
+  constructor(private dataService: DataService){
+
+  }
+
+  async ngOnInit(){
+    this.cartItems = await this.dataService.addToCartData()
+  }
+
+  // cartItems = [
+  //   {
+  //     image: '../../assets/powerbank.png',
+  //     title: 'PowerBank',
+  //     price: '$18.00',
+  //     quantity: 1
+  //   },
+  //   {
+  //     image: '../../assets/powerbank.png',
+  //     title: 'Sports',
+  //     price: '$18.00',
+  //     quantity: 6
+  //   },
+  //   {
+  //     image: '../../assets/powerbank.png',
+  //     title: 'Trouser',
+  //     price: '$18.00',
+  //     quantity: 1
+  //   },
+  //   {
+  //     image: '../../assets/powerbank.png',
+  //     title: 'Laptop',
+  //     price: '$18.00',
+  //     quantity: 1
+  //   }
+  // ]
 
 }

@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { AllProductListingComponent } from '../all-product-listing/all-product-listing.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, addDoc, collection, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-best-products',
@@ -49,10 +49,10 @@ export class BestProductsComponent {
     this._snackBar.open('Product added to cart', 'Undo', {
       duration: 3000
     });
-    this.dataService.updateProductCount(this.productCount);
     try {
       const cartRef = collection(this.firestore, 'AddedCartItems');
       await addDoc(cartRef, {userId :this.userId, ...productData});
+      this.dataService.updateProductCount(this.productCount);
       console.log('Product added to cart');
     } catch (error) {
       console.error('Error adding product to cart:', error);
