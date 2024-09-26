@@ -3,6 +3,10 @@
     <span class="grey-font-size">POPULAR PRODUCTS</span>
     <h1>ONLY BEST PRODUCTS</h1>
   </div>
+  <!-- //LOADER -->
+  <div class="spinner" *ngIf="loader">
+    <mat-spinner [diameter]="70"></mat-spinner>
+  </div>
   <div class="products-container">
     <div class="categories-imgs">
       <div class="view-products border" *ngFor="let product of viewProducts">

@@ -9,7 +9,7 @@
       <span>{{'$110.00'}}</span>
     </div>
   </div>
-  <div class="cart-items-section" *ngFor="let item of cartItems">
+  <div class="cart-items-section" *ngFor="let item of dataService.cartItems">
     <div class="left-section">
       <div class="cart-img">
         <img [src]="item?.imageUrl" alt="" height="60" width="60">

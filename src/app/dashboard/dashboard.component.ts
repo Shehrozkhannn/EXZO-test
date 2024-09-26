@@ -190,4 +190,8 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching products:', error);
     }
   }
+
+  changeItems(itemsInCart:any){
+    console.log('itemsInCart',itemsInCart)
+  }
 }

@@ -13,13 +13,15 @@ import { DataService } from '../data.service';
 })
 export class ItemsProgressCartComponent implements OnInit {
   cartItems: any = [];
+ 
 
-  constructor(private dataService: DataService){
+  constructor(public dataService: DataService){
 
   }
 
   async ngOnInit(){
-    this.cartItems = await this.dataService.addToCartData()
+    // this.cartItems = await this.dataService.addToCartData();
+    // this.dataService.updateProductCount(this.cartItems.length);
   }
 
   // cartItems = [

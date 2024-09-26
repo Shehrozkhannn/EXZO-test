@@ -7,11 +7,12 @@ import { AllProductListingComponent } from '../all-product-listing/all-product-l
 import { MatDialog } from '@angular/material/dialog';
 import { Auth } from '@angular/fire/auth';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-best-products',
   standalone: true,
-  imports: [CommonModule,MatIconModule],
+  imports: [CommonModule,MatIconModule,MatProgressSpinnerModule],
   templateUrl: './best-products.component.html',
   styleUrl: './best-products.component.scss'
 })
@@ -19,12 +20,15 @@ export class BestProductsComponent {
    @Input() productListing:any
    @Input() viewProducts: any;
    firestore: any = inject(Firestore);
+   cartItems:any = []
    @Input() isPopup:any;
    @Output() newItemEvent = new EventEmitter<number>();
+   @Output() ItemsInCart = new EventEmitter<any>();
    productCount:number= 0;
+   loader: boolean = false;
    userId:any = '';
 
-  constructor(private _snackBar: MatSnackBar, private dataService: DataService,public dialog: MatDialog,private auth: Auth) {
+  constructor(private _snackBar: MatSnackBar, public dataService: DataService,public dialog: MatDialog,private auth: Auth) {
     this.auth.onAuthStateChanged((user)=> {
       console.log('BEST--->',user)
       this.userId = user?.uid;
@@ -44,19 +48,21 @@ export class BestProductsComponent {
   }
 
   async addProductToCart(productData:any){
-    console.log(this.viewProducts)
-    this.productCount = this.productCount + 1
-    this._snackBar.open('Product added to cart', 'Undo', {
-      duration: 3000
-    });
     try {
+      this.loader = true;
       const cartRef = collection(this.firestore, 'AddedCartItems');
       await addDoc(cartRef, {userId :this.userId, ...productData});
-      this.dataService.updateProductCount(this.productCount);
       console.log('Product added to cart');
+      this.cartItems = await this.dataService.addToCartData();
+      this.dataService.updateProductCount(this.cartItems.length);
+      this.ItemsInCart.emit(this.cartItems)
+      this._snackBar.open('Product added to cart', 'Undo', {
+        duration: 3000
+      });
     } catch (error) {
       console.error('Error adding product to cart:', error);
     }
+    this.loader = false;
     
   }
 

@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
   totalProductCount = new BehaviorSubject(0);
+  cartItems:any = [];
   $totalProductCount = this.totalProductCount.asObservable();
   firestore: Firestore = inject(Firestore);
   viewProducts: any=[];
