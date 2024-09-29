@@ -22,8 +22,7 @@ export class BestProductsComponent {
    firestore: any = inject(Firestore);
    cartItems:any = []
    @Input() isPopup:any;
-   @Output() newItemEvent = new EventEmitter<number>();
-   @Output() ItemsInCart = new EventEmitter<any>();
+   @Output() test: EventEmitter<any> = new EventEmitter();
    productCount:number= 0;
    loader: boolean = false;
    userId:any = '';
@@ -53,9 +52,9 @@ export class BestProductsComponent {
       const cartRef = collection(this.firestore, 'AddedCartItems');
       await addDoc(cartRef, {userId :this.userId, ...productData});
       console.log('Product added to cart');
-      this.cartItems = await this.dataService.addToCartData();
-      this.dataService.updateProductCount(this.cartItems.length);
-      this.ItemsInCart.emit(this.cartItems)
+      const {cartItems, itemCount } = await this.dataService.addToCartData();
+      this.cartItems = cartItems;
+      this.dataService.updateProductCount(itemCount);
       this._snackBar.open('Product added to cart', 'Undo', {
         duration: 3000
       });

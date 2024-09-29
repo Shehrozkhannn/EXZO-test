@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { BestProductsComponent } from '../best-products/best-products.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { CollectionsComponent } from '../collections/collections.component';
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  constructor(private auth: Auth, private dataService: DataService){
+  constructor(private auth: Auth, private dataService: DataService, private cd: ChangeDetectorRef){
     this.getDashboardDataSuccess = true
     this.auth.onAuthStateChanged((user)=> {
       console.log(user);
@@ -164,7 +164,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.dataService.waitForUserId();
+    await this.dataService.addToCartData();
+    console.log('DASHBOARD COMPONENET INITIALIZED!')
     this.getAllProducts();
   }
 
@@ -191,7 +194,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  changeItems(itemsInCart:any){
-    console.log('itemsInCart',itemsInCart)
+  test(itemsInCart:any){
+    console.log('itemsInCart',itemsInCart);
+    this.cd.detectChanges();
   }
 }

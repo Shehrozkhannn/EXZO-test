@@ -20,8 +20,8 @@ export class ItemsProgressCartComponent implements OnInit {
   }
 
   async ngOnInit(){
-    // this.cartItems = await this.dataService.addToCartData();
-    // this.dataService.updateProductCount(this.cartItems.length);
+    const {cartItems }= await this.dataService.addToCartData();
+    this.cartItems = cartItems;
   }
 
   // cartItems = [

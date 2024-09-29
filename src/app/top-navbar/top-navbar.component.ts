@@ -27,6 +27,9 @@ export class TopNavbarComponent {
     this.dataService.$totalProductCount.subscribe(
       count => this.currentCount = count
     );
+    // this.dataService.cartItems$.subscribe((items) => {
+    //   this.cartItems = items;
+    // });
   }
 
   refreshComponent(){
