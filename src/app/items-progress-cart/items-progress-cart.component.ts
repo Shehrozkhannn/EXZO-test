@@ -13,6 +13,7 @@ import { DataService } from '../data.service';
 })
 export class ItemsProgressCartComponent implements OnInit {
   cartItems: any = [];
+  totalCartPrice:number = 0;
  
 
   constructor(public dataService: DataService){
@@ -22,33 +23,8 @@ export class ItemsProgressCartComponent implements OnInit {
   async ngOnInit(){
     const {cartItems }= await this.dataService.addToCartData();
     this.cartItems = cartItems;
+    this.totalCartPrice = this.cartItems.reduce((acc: any, val: { price: any; })=> acc + Number(val.price) ,0)
+    console.log(this.totalCartPrice);
+    
   }
-
-  // cartItems = [
-  //   {
-  //     image: '../../assets/powerbank.png',
-  //     title: 'PowerBank',
-  //     price: '$18.00',
-  //     quantity: 1
-  //   },
-  //   {
-  //     image: '../../assets/powerbank.png',
-  //     title: 'Sports',
-  //     price: '$18.00',
-  //     quantity: 6
-  //   },
-  //   {
-  //     image: '../../assets/powerbank.png',
-  //     title: 'Trouser',
-  //     price: '$18.00',
-  //     quantity: 1
-  //   },
-  //   {
-  //     image: '../../assets/powerbank.png',
-  //     title: 'Laptop',
-  //     price: '$18.00',
-  //     quantity: 1
-  //   }
-  // ]
-
 }
