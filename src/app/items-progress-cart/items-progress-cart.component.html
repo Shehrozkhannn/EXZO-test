@@ -1,26 +1,34 @@
-<h2 mat-dialog-title>ITEMS IN THE CART</h2>
-<div class="container">
-  <div class="cart-price">
-    <div class="cart-icon-text">
-      <img src="../../assets/icons8-cart-30.png" alt="" height="23" width="23">
-      <span> Your Cart</span>
-    </div>
-    <div class="price">
-      <span>{{totalCartPrice + '$'}}</span>
-    </div>
-  </div>
-  <div class="cart-items-section" *ngFor="let item of cartItems">
-    <div class="left-section">
-      <div class="cart-img">
-        <img [src]="item?.imageUrl" alt="" height="60" width="60">
+<div class="main-cart">
+  <h2 mat-dialog-title>ITEMS IN THE CART</h2>
+  <div class="container">
+    <div class="cart-price" *ngIf="cartItems.length">
+      <div class="cart-icon-text">
+        <img src="../../assets/icons8-cart-30.png" alt="" height="23" width="23">
+        <span> Your Cart</span>
       </div>
-      <div class="title-price">
-        <h3>{{item?.productName}}</h3>
-        <span>{{item?.price + '$'}}</span>
+      <div class="price">
+        <span>{{totalCartPrice + '$'}}</span>
       </div>
     </div>
-    <div class="right-section">
-      <span>{{item.quantity || '1'}}</span>
+    <div class="cart-items-section" *ngFor="let item of cartItems">
+      <div class="left-section">
+        <div class="cart-img">
+          <img [src]="item?.imageUrl" alt="" height="60" width="60">
+        </div>
+        <div class="title-price">
+          <h3>{{item?.productName}}</h3>
+          <span>{{item?.price + '$'}}</span>
+        </div>
+      </div>
+      <div class="right-section">
+        <span>-</span>&nbsp;&nbsp;&nbsp;
+        <span>{{item.quantity || '1'}}</span>&nbsp;&nbsp;&nbsp;
+        <span>+</span>
+
+      </div>
+    </div>
+    <div class="loader" *ngIf="loading">
+      <mat-spinner [diameter]="50"></mat-spinner>
     </div>
   </div>
 </div>
