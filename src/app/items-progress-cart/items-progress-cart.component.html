@@ -21,9 +21,9 @@
         </div>
       </div>
       <div class="right-section">
-        <span>-</span>&nbsp;&nbsp;&nbsp;
+        <span style="font-size: 20px; cursor: pointer;">-</span>&nbsp;&nbsp;&nbsp;
         <span>{{item.quantity || '1'}}</span>&nbsp;&nbsp;&nbsp;
-        <span>+</span>
+        <span style="cursor: pointer;" (click)="increaseItemQuantity(item)">+</span>
 
       </div>
     </div>

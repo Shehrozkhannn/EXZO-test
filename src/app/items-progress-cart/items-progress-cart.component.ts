@@ -33,4 +33,10 @@ export class ItemsProgressCartComponent implements OnInit {
       this.loading =  false;
     }
   }
+
+  increaseItemQuantity(item:any){
+    console.log(item);
+    item.price = item.price + item.price;
+    
+  }
 }

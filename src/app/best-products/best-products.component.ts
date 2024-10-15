@@ -48,10 +48,10 @@ export class BestProductsComponent {
 
   async addProductToCart(productData:any){
     try {
+      productData.quantity = productData.quantity + 1;
       this.loader = true;
       const cartRef = collection(this.firestore, 'AddedCartItems');
       await addDoc(cartRef, {userId :this.userId, ...productData});
-      console.log('Product added to cart');
       const {cartItems, itemCount } = await this.dataService.addToCartData();
       this.cartItems = cartItems;
       this.dataService.updateProductCount(itemCount);
