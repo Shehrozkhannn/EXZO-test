@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, collection, getDocs, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -59,13 +59,36 @@ export class DataService {
     const snapshot = await getDocs(q);
 
     const cartItems = snapshot.docs.map((doc)=>({
-      id: doc.id,
+      documentId: doc.id,
       ...doc.data()
     }));
     const itemCount = snapshot.size
     this.totalProductCount.next(itemCount)
     console.log(cartItems);
     return {cartItems, itemCount}
+  }
+
+  async updateCartItem(item: any) {
+    try {
+      const docRef = doc(this.firestore, 'AddedCartItems', item.documentId); // Reference to the document
+      await updateDoc(docRef, {
+        quantity: item.quantity, // Update the quantity in Firestore
+        modifiedPrice: item.modifiedPrice // Optionally, update the price if it depends on quantity
+      });
+      console.log('Cart item updated successfully');
+    } catch (error) {
+      console.error('Error updating cart item:', error);
+    }
+  }
+
+  async deleteCartItem(itemId: string): Promise<void> {
+    try {
+      const itemRef = doc(this.firestore, `AddedCartItems/${itemId}`);
+      await deleteDoc(itemRef);
+    } catch (error) {
+      console.error('Error deleting item from Firestore:', error);
+      throw error;
+    }
   }
 
 }

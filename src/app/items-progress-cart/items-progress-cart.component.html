@@ -17,12 +17,12 @@
         </div>
         <div class="title-price">
           <h3>{{item?.productName}}</h3>
-          <span>{{item?.price + '$'}}</span>
+          <span>{{ item?.modifiedPrice !== undefined ? item?.modifiedPrice + '$' : item?.price + '$' }}</span>
         </div>
       </div>
       <div class="right-section">
-        <span style="font-size: 20px; cursor: pointer;">-</span>&nbsp;&nbsp;&nbsp;
-        <span>{{item.quantity || '1'}}</span>&nbsp;&nbsp;&nbsp;
+        <span style="font-size: 20px; cursor: pointer;" (click)="descreaseItemQuantity(item)">-</span>&nbsp;&nbsp;&nbsp;
+        <span>{{item.quantity}}</span>&nbsp;&nbsp;&nbsp;
         <span style="cursor: pointer;" (click)="increaseItemQuantity(item)">+</span>
 
       </div>
