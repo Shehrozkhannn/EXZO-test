@@ -68,8 +68,9 @@ export class ItemsProgressCartComponent implements OnInit {
       }).then(async(result) => {
         if (result.isConfirmed) {
           try {
-            await this.dataService.deleteCartItem(item.documentId);  // Method to delete the item from Firestore
             this.cartItems = this.cartItems.filter((cartItem:any)=> item.id !== cartItem.id);
+            await this.dataService.deleteCartItem(item.documentId);  // Method to delete the item from Firestore
+            this.dataService.updateProductCount(this.cartItems.length);
             Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
           } catch (error) {
             console.error('Error deleting cart item:', error);

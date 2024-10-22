@@ -17,6 +17,7 @@ import e from 'express';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from '../data.service';
+import { Products } from '../interfaces/products';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
   uid:any;
   authChecked: boolean = false;
   getDashboardDataSuccess: boolean = false;
-  viewProducts:any = [];
+  viewProducts:Products[] = [];
   productListing  = [
     {
       image: 'assets/headphone-product.png',
