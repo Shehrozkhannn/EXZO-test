@@ -17,6 +17,7 @@ export class ItemsProgressCartComponent implements OnInit {
   cartItems: any = [];
   totalCartPrice: number = 0;
   loading: boolean = false;
+  noItemsIntheCart: boolean = false;
 
   constructor(public dataService: DataService,) { }
 
@@ -30,6 +31,7 @@ export class ItemsProgressCartComponent implements OnInit {
       const { cartItems } = await this.dataService.addToCartData();
       this.cartItems = cartItems;
       this.calculateTotalPrice();
+      if(!this.cartItems.length) this.noItemsIntheCart = true;
     }
     catch (error) {
       console.error('Error fetching cart data:', error);
@@ -71,6 +73,7 @@ export class ItemsProgressCartComponent implements OnInit {
             this.cartItems = this.cartItems.filter((cartItem:any)=> item.id !== cartItem.id);
             await this.dataService.deleteCartItem(item.documentId);  // Method to delete the item from Firestore
             this.dataService.updateProductCount(this.cartItems.length);
+            this.noItemsIntheCart = true;
             Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
           } catch (error) {
             console.error('Error deleting cart item:', error);

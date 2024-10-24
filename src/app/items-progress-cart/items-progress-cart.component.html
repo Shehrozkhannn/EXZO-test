@@ -31,4 +31,7 @@
       <mat-spinner [diameter]="50"></mat-spinner>
     </div>
   </div>
+  <div class="no-items-found" *ngIf="!cartItems.length && noItemsIntheCart">
+    <h2>{{'No Items in the Cart!'}}</h2>
+  </div>
 </div>
