@@ -19,7 +19,7 @@ export class ItemsProgressCartComponent implements OnInit {
   loading: boolean = false;
   noItemsIntheCart: boolean = false;
 
-  constructor(public dataService: DataService,) { }
+  constructor(public dataService: DataService) { }
 
   async ngOnInit() {
     this.loadCartItems();
@@ -29,7 +29,7 @@ export class ItemsProgressCartComponent implements OnInit {
     try {
       this.loading = true;
       const { cartItems } = await this.dataService.addToCartData();
-      this.cartItems = cartItems;
+      this.cartItems = this.removeDuplicateItems(cartItems);;
       this.calculateTotalPrice();
       if(!this.cartItems.length) this.noItemsIntheCart = true;
     }
@@ -41,6 +41,17 @@ export class ItemsProgressCartComponent implements OnInit {
     }
   }
 
+  removeDuplicateItems(array:any){
+    const uniqueIds = new Set(); // Track unique IDs
+    return array.filter((item:any) => {
+      if (!uniqueIds.has(item.id)) {
+        uniqueIds.add(item.id);
+        return true;
+      }
+      return false;
+    });
+  };
+  
   calculateTotalPrice() {
     this.totalCartPrice = this.cartItems.reduce(
       (acc: number, item: { price: number; quantity: number }) => acc + item.price * item.quantity,
