@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { AllProductListingComponent } from '../all-product-listing/all-product-listing.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
@@ -46,23 +46,47 @@ export class BestProductsComponent {
     product.rating = value;
   }
 
-  async addProductToCart(productData:any){
+  async addProductToCart(productData: any) {
     try {
-      productData.quantity = !productData.quantity ? 1 : productData.quantity + 1;
       this.loader = true;
+      // Set initial quantity to 1 if it doesn’t exist, or increment it if it does.
+      productData.quantity = productData.quantity ? productData.quantity + 1 : 1;
+      // Reference to the cart items collection in Firebase
       const cartRef = collection(this.firestore, 'AddedCartItems');
-      await addDoc(cartRef, {userId :this.userId, ...productData});
-      const {cartItems, itemCount } = await this.dataService.addToCartData();
+  
+      // Query to check if the item with the same ID already exists in the user's cart
+      const q = query(cartRef, where("userId", "==", this.userId), where("id", "==", productData.id));
+      const querySnapshot = await getDocs(q);
+  
+      if (!querySnapshot.empty) {
+        // If the item exists, update the quantity
+        const existingDoc = querySnapshot.docs[0];
+        const existingDocRef = doc(this.firestore, 'AddedCartItems', existingDoc.id);
+        const existingData = existingDoc.data();
+  
+        // Update the quantity in Firebase
+        await updateDoc(existingDocRef, {
+          quantity: (existingData['quantity'] || 0) + 1,
+        });
+  
+        this._snackBar.open('Product quantity updated in cart', 'Undo', { duration: 3000 });
+      } else {
+        // If the item does not exist, add it as a new document
+        await addDoc(cartRef, { userId: this.userId, ...productData });
+  
+        this._snackBar.open('Product added to cart', 'Undo', { duration: 3000 });
+      }
+  
+      // Update local cart items and item count in the data service
+      const { cartItems, itemCount } = await this.dataService.addToCartData();
       this.cartItems = cartItems;
       this.dataService.updateProductCount(itemCount);
-      this._snackBar.open('Product added to cart', 'Undo', {
-        duration: 3000
-      });
+  
     } catch (error) {
       console.error('Error adding product to cart:', error);
+    } finally {
+      this.loader = false;
     }
-    this.loader = false;
-    
   }
 
   allCategories(){
