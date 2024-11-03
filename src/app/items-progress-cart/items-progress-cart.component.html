@@ -1,7 +1,7 @@
 <div class="main-cart">
   <h2 mat-dialog-title>ITEMS IN THE CART</h2>
-  <div class="container">
-    <div class="cart-price" *ngIf="cartItems.length">
+  <div class="container" *ngIf="cartItems.length">
+    <div class="cart-price">
       <div class="cart-icon-text">
         <img src="../../assets/icons8-cart-30.png" alt="" height="23" width="23">
         <span> Your Cart</span>
@@ -10,26 +10,30 @@
         <span>{{totalCartPrice + '$'}}</span>
       </div>
     </div>
-    <div class="cart-items-section" *ngFor="let item of cartItems">
-      <div class="left-section">
-        <div class="cart-img">
-          <img [src]="item?.imageUrl" alt="" height="60" width="60">
+    <div class="cart">
+      <div class="cart-items-section" *ngFor="let item of cartItems">
+        <div class="left-section">
+          <div class="cart-img">
+            <img [src]="item?.imageUrl" alt="" height="60" width="60">
+          </div>
+          <div class="title-price">
+            <h3>{{item?.productName}}</h3>
+            <span>{{ item?.modifiedPrice !== undefined ? item?.modifiedPrice + '$' : item?.price + '$' }}</span>
+          </div>
         </div>
-        <div class="title-price">
-          <h3>{{item?.productName}}</h3>
-          <span>{{ item?.modifiedPrice !== undefined ? item?.modifiedPrice + '$' : item?.price + '$' }}</span>
+        <div class="right-section">
+          <span style="font-size: 20px; cursor: pointer;" (click)="descreaseItemQuantity(item)">-</span>&nbsp;&nbsp;&nbsp;
+          <span>{{item.quantity}}</span>&nbsp;&nbsp;&nbsp;
+          <span style="cursor: pointer;" (click)="increaseItemQuantity(item)">+</span>
         </div>
       </div>
-      <div class="right-section">
-        <span style="font-size: 20px; cursor: pointer;" (click)="descreaseItemQuantity(item)">-</span>&nbsp;&nbsp;&nbsp;
-        <span>{{item.quantity}}</span>&nbsp;&nbsp;&nbsp;
-        <span style="cursor: pointer;" (click)="increaseItemQuantity(item)">+</span>
-
-      </div>
     </div>
-    <div class="loader" *ngIf="loading">
-      <mat-spinner [diameter]="50"></mat-spinner>
+    <div class="submit-order">
+      <button>Place Order</button>
     </div>
+  </div>
+  <div class="loader" *ngIf="loading">
+    <mat-spinner [diameter]="50"></mat-spinner>
   </div>
   <div class="no-items-found" *ngIf="!cartItems.length && noItemsIntheCart">
     <h2>{{'No Items in the Cart!'}}</h2>

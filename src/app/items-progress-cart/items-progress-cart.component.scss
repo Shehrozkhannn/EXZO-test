@@ -6,12 +6,15 @@
   left: 322px !important;
 }
 ::ng-deep .cdk-overlay-pane{
-  height: 392px;
+  height: 446px;
   overflow: scroll;
 }
 
 .container{
   width: 600px !important;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   .cart-price{
     display: flex;
     justify-content: space-between;
@@ -26,6 +29,10 @@
         margin-right: 8px;
       }
     }
+  }
+  .cart{
+    overflow-y: scroll;
+    height: 250px;
   }
   .cart-items-section{
     padding:8px 30px 14px 30px;
@@ -46,6 +53,20 @@
       height: 40px;
     }
   }
+  .submit-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+      height: 45px;
+      width: 181px;
+      color: #fff;
+      background: rgb(237, 152, 34);
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 .no-items-found{
   height: 170px;
@@ -58,6 +79,9 @@
   }
 }
 .main-cart{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   position: relative;
 }
