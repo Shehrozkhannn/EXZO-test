@@ -49,22 +49,17 @@ export class BestProductsComponent {
   async addProductToCart(productData: any) {
     try {
       this.loader = true;
-      // Set initial quantity to 1 if it doesn’t exist, or increment it if it does.
       productData.quantity = productData.quantity ? productData.quantity + 1 : 1;
-      // Reference to the cart items collection in Firebase
       const cartRef = collection(this.firestore, 'AddedCartItems');
   
-      // Query to check if the item with the same ID already exists in the user's cart
       const q = query(cartRef, where("userId", "==", this.userId), where("id", "==", productData.id));
       const querySnapshot = await getDocs(q);
   
       if (!querySnapshot.empty) {
-        // If the item exists, update the quantity
         const existingDoc = querySnapshot.docs[0];
         const existingDocRef = doc(this.firestore, 'AddedCartItems', existingDoc.id);
         const existingData = existingDoc.data();
   
-        // Update the quantity in Firebase
         await updateDoc(existingDocRef, {
           quantity: (existingData['quantity'] || 0) + 1,
         });

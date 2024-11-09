@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../data.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
+import { Products } from '../interfaces/products';
+import { Firestore, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-items-progress-cart',
@@ -18,8 +23,12 @@ export class ItemsProgressCartComponent implements OnInit {
   totalCartPrice: number = 0;
   loading: boolean = false;
   noItemsIntheCart: boolean = false;
+  firestore: any = inject(Firestore);
+  userId:any = '';
 
-  constructor(public dataService: DataService) { }
+  constructor(public dataService: DataService, private auth: Auth, private _snackBar: MatSnackBar,private dialogRef: MatDialogRef<ItemsProgressCartComponent> ) { 
+    this.auth.onAuthStateChanged((user)=>this.userId = user?.uid)
+  }
 
   async ngOnInit() {
     this.loadCartItems();
@@ -103,6 +112,21 @@ export class ItemsProgressCartComponent implements OnInit {
       this.calculateTotalPrice();  // Recalculate total price after quantity update
     } catch (error) {
       console.error('Error updating cart item:', error);
+    }
+  }
+
+  async placeOrder(items:Products){
+    try {
+      this.loading = true;
+      const cartRef = collection(this.firestore, 'SubmitOrders');
+      // const q = query(cartRef, where("userId", "==", this.userId), where("id", "==", items.id));
+      await addDoc(cartRef, { userId: this.userId, ...items });
+      this.dialogRef.close();
+      this._snackBar.open('List of products submitted succesfully', 'Undo', { duration: 3000 }); 
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    } finally {
+      this.loading = false;
     }
   }
 }
