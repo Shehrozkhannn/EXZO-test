@@ -152,7 +152,6 @@ export class DashboardComponent implements OnInit {
   constructor(private auth: Auth, private dataService: DataService, private cd: ChangeDetectorRef){
     this.getDashboardDataSuccess = true
     this.auth.onAuthStateChanged((user)=> {
-      console.log(user);
       if(user){
         this.uid = user.uid;
         this.isUserLoggedIn.status = 'login';
@@ -168,7 +167,6 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     await this.dataService.waitForUserId();
     await this.dataService.addToCartData();
-    console.log('DASHBOARD COMPONENET INITIALIZED!')
     this.getAllProducts();
   }
 
@@ -179,7 +177,6 @@ export class DashboardComponent implements OnInit {
       const snapshot = await getDoc(userDocRef);
       if(snapshot.exists()){
         this.userData = snapshot.data() 
-        console.log(this.userData,'TESTING')
       }
     } catch (error) {
       console.error('Error fetching documents:', error);
@@ -193,10 +190,5 @@ export class DashboardComponent implements OnInit {
     } catch (error) {
       console.error('Error fetching products:', error);
     }
-  }
-
-  test(itemsInCart:any){
-    console.log('itemsInCart',itemsInCart);
-    this.cd.detectChanges();
   }
 }

@@ -22,14 +22,12 @@ export class BestProductsComponent {
    firestore: any = inject(Firestore);
    cartItems:any = []
    @Input() isPopup:any;
-   @Output() test: EventEmitter<any> = new EventEmitter();
    productCount:number= 0;
    loader: boolean = false;
    userId:any = '';
 
   constructor(private _snackBar: MatSnackBar, public dataService: DataService,public dialog: MatDialog,private auth: Auth) {
     this.auth.onAuthStateChanged((user)=> {
-      console.log('BEST--->',user)
       this.userId = user?.uid;
       
     })

@@ -24,12 +24,10 @@ export class AddToCartProductsComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: string,
   private dialogRef: MatDialogRef<AddToCartProductsComponent>) {
 
-    console.log(this.data)
     this.productsData = this.data;
    }
 
    newItemEvent(count:number){
-      console.log(count)
       this.productsCount = count;
    }
 

@@ -26,7 +26,6 @@ export class LoginComponent {
       email: new FormControl('', [Validators.required , Validators.email]),
       password: new FormControl('', [Validators.required,Validators.minLength(7)]),
     });
-    console.log(this.loginForm)
   }
   navigateToSignup(){
     this.router.navigate(['signup']);

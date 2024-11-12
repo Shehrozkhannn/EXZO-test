@@ -15,7 +15,6 @@ export class DataService {
   userId:any = '';
   constructor(private auth: Auth) { 
     this.auth.onAuthStateChanged((user)=> {
-      console.log('BEST--->',user)
       this.userId = user?.uid;
     })
   }
@@ -64,18 +63,16 @@ export class DataService {
     }));
     const itemCount = snapshot.size
     this.totalProductCount.next(itemCount)
-    console.log(cartItems);
     return {cartItems, itemCount}
   }
 
   async updateCartItem(item: any) {
     try {
-      const docRef = doc(this.firestore, 'AddedCartItems', item.documentId); // Reference to the document
+      const docRef = doc(this.firestore, 'AddedCartItems', item.documentId);
       await updateDoc(docRef, {
-        quantity: item.quantity, // Update the quantity in Firestore
-        modifiedPrice: item.modifiedPrice // Optionally, update the price if it depends on quantity
+        quantity: item.quantity,
+        modifiedPrice: item.modifiedPrice
       });
-      console.log('Cart item updated successfully');
     } catch (error) {
       console.error('Error updating cart item:', error);
     }

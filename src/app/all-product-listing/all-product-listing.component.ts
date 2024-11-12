@@ -17,13 +17,11 @@ export class AllProductListingComponent {
   product:any;
   productListing:any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: string){
-    console.log(this.data,'DATA-->');
     this.productListing = this.data
     this.overallProducts = [...this.productListing]
   }
 
   onRadioChange(filter:any){
-    console.log(filter.value)
     if(filter.value === 'all'){
       this.productListing = [...this.overallProducts];
     }else{
