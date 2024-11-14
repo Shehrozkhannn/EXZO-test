@@ -1,4 +1,5 @@
 .container{
+  padding: 22px;
   .top-title{
     display: flex;
     align-items: center;
@@ -11,4 +12,37 @@
       margin-right: 10px;
     }
   }
+  .order-details{
+    width: 100%;
+    font-size: 18px;
+    color: red;
+    
+  }
+  .other-details{
+    margin-top: 18px;
+    .price{
+      font-size: 18px;
+      span{
+        color: red;
+      }
+    }
+    .new-order-btn{
+      margin-top: 15px;
+      button{
+        height: 45px;
+        width: 100%;
+        color: #fff;
+        background: rgb(237, 152, 34);
+        border-radius: 9px;
+        border: none;
+        cursor: pointer;
+        font-size: 17px;
+      }
+    }
+  }
+}
+table {
+  width: 100%;
+  margin-top: 18px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }

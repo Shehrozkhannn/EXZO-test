@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 import { Products } from '../interfaces/products';
-import { Firestore, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlacedOrderDetailsComponent } from '../placed-order-details/placed-order-details.component';
@@ -110,7 +110,7 @@ export class ItemsProgressCartComponent implements OnInit {
   async updateCartItem(item: any) {
     try {
       await this.dataService.updateCartItem(item);
-      this.calculateTotalPrice();  // Recalculate total price after quantity update
+      this.calculateTotalPrice();
     } catch (error) {
       console.error('Error updating cart item:', error);
     }
@@ -130,9 +130,17 @@ export class ItemsProgressCartComponent implements OnInit {
           this.loading = true;
           const cartRef = collection(this.firestore, 'SubmitOrders');
           await addDoc(cartRef, { userId: this.userId, ...items });
+
+          //REMOVE ALL ITEMS FROM CART
+          const cartItemsRef = collection(this.firestore, 'AddedCartItems');
+          const q = query(cartItemsRef, where('userId', '==', this.userId));
+          const cartItemsSnapshot = await getDocs(q);
+          const deletePromises = cartItemsSnapshot.docs.map((doc) => deleteDoc(doc.ref));
+          await Promise.all(deletePromises);
+          this.dataService.updateProductCount(0);
           this.dialogRef.close();
           this.dialog.open(PlacedOrderDetailsComponent,{
-            data: '',
+            data: {items: items, totalCartPrice: this.totalCartPrice},
             width: '60%',
             height: '500px'
           })
