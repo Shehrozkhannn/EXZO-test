@@ -133,7 +133,8 @@ export class ItemsProgressCartComponent implements OnInit {
           this.dialogRef.close();
           this.dialog.open(PlacedOrderDetailsComponent,{
             data: '',
-            width: '80%',
+            width: '60%',
+            height: '500px'
           })
           this._snackBar.open('List of products submitted succesfully', 'Undo', { duration: 3000 }); 
         }

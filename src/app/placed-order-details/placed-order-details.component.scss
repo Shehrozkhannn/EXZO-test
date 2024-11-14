@@ -1,0 +1,14 @@
+.container{
+  .top-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130px;
+    span{
+      font-size: 34px;
+    }
+    img{
+      margin-right: 10px;
+    }
+  }
+}
