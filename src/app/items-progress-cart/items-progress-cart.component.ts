@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DataService } from '../data.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
@@ -9,6 +9,7 @@ import { Products } from '../interfaces/products';
 import { Firestore, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PlacedOrderDetailsComponent } from '../placed-order-details/placed-order-details.component';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ItemsProgressCartComponent implements OnInit {
   firestore: any = inject(Firestore);
   userId:any = '';
 
-  constructor(public dataService: DataService, private auth: Auth, private _snackBar: MatSnackBar,private dialogRef: MatDialogRef<ItemsProgressCartComponent> ) { 
+  constructor(public dataService: DataService, private auth: Auth, private _snackBar: MatSnackBar,private dialogRef: MatDialogRef<ItemsProgressCartComponent>,public dialog: MatDialog ) { 
     this.auth.onAuthStateChanged((user)=>this.userId = user?.uid)
   }
 
@@ -117,14 +118,31 @@ export class ItemsProgressCartComponent implements OnInit {
 
   async placeOrder(items:Products){
     try {
-      this.loading = true;
-      const cartRef = collection(this.firestore, 'SubmitOrders');
-      // const q = query(cartRef, where("userId", "==", this.userId), where("id", "==", items.id));
-      await addDoc(cartRef, { userId: this.userId, ...items });
-      this.dialogRef.close();
-      this._snackBar.open('List of products submitted succesfully', 'Undo', { duration: 3000 }); 
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to place this Order?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+      }).then(async(res)=>{
+        if(res.isConfirmed){
+          this.loading = true;
+          const cartRef = collection(this.firestore, 'SubmitOrders');
+          await addDoc(cartRef, { userId: this.userId, ...items });
+          this.dialogRef.close();
+          this.dialog.open(PlacedOrderDetailsComponent,{
+            data: '',
+            width: '80%',
+          })
+          this._snackBar.open('List of products submitted succesfully', 'Undo', { duration: 3000 }); 
+        }
+        else if (res.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire('Cancelled', 'error');
+        }
+      })
     } catch (error) {
-      console.error('Error adding product to cart:', error);
+      console.error('Error placing order:', error);
     } finally {
       this.loading = false;
     }
