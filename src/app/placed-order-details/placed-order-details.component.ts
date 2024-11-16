@@ -38,6 +38,5 @@ export class PlacedOrderDetailsComponent implements OnInit{
   }
   ngOnInit(){
     this.dataSource = this.dataSource.map((item:any,index:any)=> ({...item , position: index + 1}))
-    console.log(this.orders)
   }
 }
