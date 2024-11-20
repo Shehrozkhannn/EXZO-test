@@ -35,14 +35,13 @@ export class DataService {
       console.error('Error fetching documents:', error);
     }
   }
-    // New method to wait for userId
     waitForUserId(): Promise<string> {
       return new Promise((resolve) => {
         const unsubscribe = this.auth.onAuthStateChanged((user) => {
           if (user) {
             this.userId = user.uid;
-            unsubscribe(); // Stop listening once we have the userId
-            resolve(this.userId); // Resolve the promise with the userId
+            unsubscribe();
+            resolve(this.userId); 
           }
         });
       });

@@ -3,7 +3,6 @@
     <span class="grey-font-size">POPULAR PRODUCTS</span>
     <h1>ONLY BEST PRODUCTS</h1>
   </div>
-  <!-- //LOADER -->
   <div class="spinner" *ngIf="loader">
     <mat-spinner [diameter]="70"></mat-spinner>
   </div>
@@ -12,7 +11,6 @@
       <div class="view-products border" *ngFor="let product of viewProducts">
          <img [src]="product.imageUrl" loading="lazy">
          <h3 class="bold">{{product?.productName}}</h3>
-         <!-- ratings -->
          <div class="star-rating-container star-rating-animation" fxLayout="row" fxLayoutAlign="start center" >
            <div *ngFor="let star of product.stars" [ngClass]="[star.class]" (click)="selectStar(star.id, product)">
                <mat-icon>{{star.icon}}</mat-icon>
