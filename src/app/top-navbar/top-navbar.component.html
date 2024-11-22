@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- AFTER LOGIN -->
   <div class="main-container" *ngIf="isUserLoggedIn.status === 'login' && userData">
     <div class="left-section">
@@ -40,8 +40,12 @@
     </div>
     <div class="right-section">
       <div class="country top-nav-padding">
-        <img src="assets/united-states.png" alt="">
-        <span class="bold">USD</span>
+        <!-- <img src="assets/united-states.png" alt="">
+        <span class="bold">USD</span> -->
+        <mat-select-country appearance="outline" [label]="'Select a country'"
+          (onCountrySelected)="onCountrySelected($event)" [countries]="predefinedCountries">
+        </mat-select-country>
+
       </div>
       <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked">
         <img src="assets/like.png" alt="" [ngClass]="{'light-green': isLiked === true}">
@@ -51,7 +55,8 @@
       </div>
       <div class="my-card cart top-nav-padding border" (click)="showAddToCartItems()">
         <span class="bold">MY CART</span>
-        <mat-icon class="cursor-pointer" [matBadge]= currentCount matBadgeColor="warn" aria-hidden="false">add_shopping_cart</mat-icon>
+        <mat-icon class="cursor-pointer" [matBadge]=currentCount matBadgeColor="warn"
+          aria-hidden="false">add_shopping_cart</mat-icon>
       </div>
     </div>
     <div class="logout-btn">
@@ -63,6 +68,3 @@
   <!-- Optional: Show a loading spinner or placeholder while determining login status -->
   <p>Loading...</p>
 </div>
-
-
-
