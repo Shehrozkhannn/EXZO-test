@@ -39,14 +39,6 @@
       </div>
     </div>
     <div class="right-section">
-      <div class="country top-nav-padding">
-        <!-- <img src="assets/united-states.png" alt="">
-        <span class="bold">USD</span> -->
-        <mat-select-country appearance="outline" [label]="'Select a country'"
-          (onCountrySelected)="onCountrySelected($event)" [countries]="predefinedCountries">
-        </mat-select-country>
-
-      </div>
       <div class="like-icon top-nav-padding border" (click)="isLiked=!isLiked">
         <img src="assets/like.png" alt="" [ngClass]="{'light-green': isLiked === true}">
       </div>
@@ -59,8 +51,9 @@
           aria-hidden="false">add_shopping_cart</mat-icon>
       </div>
     </div>
-    <div class="logout-btn">
+    <div class="top-btns">
       <button (click)="logout()">LOGOUT</button>
+      <button (click)="navigateToAdminPanel()">ADMIN</button>
     </div>
   </div>
 </div>

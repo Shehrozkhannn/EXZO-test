@@ -20,6 +20,7 @@ import { LearnMoreComponent } from '../learn-more/learn-more.component';
 export class MainSliderImgComponent {
 @Input() viewProducts: any;
 @Input() variant:string | undefined;
+@Input() isUserLoggedIn:any
 constructor(public dialog: MatDialog) {}
 
 slides = [
@@ -44,6 +45,7 @@ get customStyles() {
   return this.variant === 'second' ? 'custom-styles-for-second-slider' : '';
 }
 addtoCart(){
+  console.log(this.isUserLoggedIn)
   this.dialog.open(AddToCartProductsComponent,{
     data: this.viewProducts,
     autoFocus: false,

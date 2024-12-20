@@ -12,7 +12,7 @@
           <li>Perfect sound</li>
           <li>It works quite literally</li>
         </ul>
-        <div class="buttons">
+        <div class="buttons" *ngIf="isUserLoggedIn?.status === 'login'">
           <button class="learn-more" (click)="learnMore()">Learn More</button>
           <button class="add-to-cart" (click)="addtoCart()">Add to Cart</button>
         </div>

@@ -21,36 +21,6 @@ export class TopNavbarComponent {
   @Input() userData:any;
   currentCount:any;
   isLiked:boolean = false;
-  predefinedCountries: Country[] = [
-    {
-      name: 'Germany',
-      alpha2Code: 'DE',
-      alpha3Code: 'DEU',
-      numericCode: '276',
-      callingCode: '+49'
-    },
-    {
-      name: 'Greece',
-      alpha2Code: 'GR',
-      alpha3Code: 'GRC',
-      numericCode: '300',
-      callingCode: '+30'
-    },
-    {
-      name: 'France',
-      alpha2Code: 'FR',
-      alpha3Code: 'FRA',
-      numericCode: '250',
-      callingCode: '+33'
-    },
-    {
-      name: 'Belgium',
-      alpha2Code: 'BE',
-      alpha3Code: 'BEL',
-      numericCode: '056',
-      callingCode: '+32'
-    }
-  ];
   constructor(private dataService: DataService, private router: Router, private auth: Auth,public dialog: MatDialog){
 
   }
@@ -58,10 +28,6 @@ export class TopNavbarComponent {
     this.dataService.$totalProductCount.subscribe(
       count => this.currentCount = count
     );
-  }
-
-  onCountrySelected(event: any): void {
-    console.log('Selected Country:', event);
   }
 
   refreshComponent(){
@@ -75,6 +41,10 @@ export class TopNavbarComponent {
 
   login(){
     this.router.navigate(['/login'])
+  }
+
+  navigateToAdminPanel(){
+    this.router.navigate(['/admin-panel'])
   }
 
   register(){
