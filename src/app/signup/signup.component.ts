@@ -56,6 +56,7 @@ export class SignupComponent {
             email,
             phone,
             createdAt: new Date(),
+            role: 'mananger'
           })
         this._snackBar.open('User Signed Up Successfully!!', 'close', {
             horizontalPosition: this.horizontalPosition,

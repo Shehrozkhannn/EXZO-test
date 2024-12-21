@@ -53,7 +53,7 @@
     </div>
     <div class="top-btns">
       <button (click)="logout()">LOGOUT</button>
-      <button (click)="navigateToAdminPanel()">ADMIN</button>
+      <button (click)="navigateToAdminPanel()" *ngIf="userData.role === 'admin'">ADMIN</button>
     </div>
   </div>
 </div>
