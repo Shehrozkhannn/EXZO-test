@@ -1,5 +1,5 @@
 .main-container{
-    background: rgb(192, 192, 192);
+    background: #c0c0c01f;
     height: 100vh;
    header{
     display: flex;
@@ -16,6 +16,51 @@
         height: 24px;
         width: 24px;
         margin-right: 17px;
+    }
+   }
+   .overview{
+    .stats{
+        display: flex;
+        justify-content: space-evenly;
+        .box{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 122px;
+            width: 285px;
+            box-shadow: 0px 2px 3px 1px #c9baba;
+            .icon{
+                height: 65px;
+                width: 65px;
+                border-radius: 127px;
+                border: 1px solid;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                img{
+                    filter: invert(1);
+                }
+            }
+        }
+        .total-products{
+            background: #afefaf;
+            .icon{
+                background: #4cb34c;
+            }
+        }
+        .out-of-stock{
+            background: #ffced6;
+            .icon{
+                background-color: #ff617d;
+            }
+        }
+        .newly-added{
+            background: #cbe2f7;
+            .icon{
+                background-color: #2c2c85d4;
+            }
+        }
     }
    }
 }
