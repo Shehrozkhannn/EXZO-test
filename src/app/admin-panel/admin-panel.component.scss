@@ -72,7 +72,18 @@
         }
     }
    }
+   .products-data{
+    margin-top: 38px;
+    mat-form-field{
+        width: 100%;
+        padding: 0px 5px;
+    }
+   }
 }
 .green{
     color: #b1cd02 
+}
+
+::ng-deep .mat-mdc-text-field-wrapper{
+    border-bottom: 1px solid #179917
 }
