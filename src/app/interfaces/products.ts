@@ -2,11 +2,11 @@
 export interface Products {
   id: string,
   description: string,
-  imageUrl: string,
+  imageUrl?: string,
   price: number,
   productName: string,
   ratings: number,
-  stars: Stars[],
+  stars?: Stars[],
   quantity? : number,
   userId? : string
 } 
