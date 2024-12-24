@@ -80,10 +80,48 @@
     }
    }
 }
+.edit{
+    width: 100px;
+    height: 35px;
+    background-color: #b1cd02;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.delete{
+    width: 100px;
+    height: 35px;
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.add-product{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 15px;
+    button{
+        width: 180px;
+        height: 35px;
+        background-color: #b1cd02;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+}
 .green{
     color: #b1cd02 
 }
+td {
+    height: 66px;
+}
 
-::ng-deep .mat-mdc-text-field-wrapper{
+:host ::ng-deep .mat-mdc-text-field-wrapper {
     border-bottom: 1px solid #179917;
 }

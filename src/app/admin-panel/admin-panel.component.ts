@@ -6,6 +6,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Products } from '../interfaces/products';
 import { DataService } from '../data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductsAdminComponent } from '../products-admin/products-admin.component';
 
 // export interface UserData {
 //   id: string;
@@ -24,7 +26,7 @@ import { DataService } from '../data.service';
   styleUrl: './admin-panel.component.scss'
 })
 export class AdminPanelComponent implements OnInit {
-  displayedColumns: string[] = ['productName', 'price', 'description', 'ratings'];
+  displayedColumns: string[] = ['productName', 'price', 'description', 'ratings','actions'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator)
@@ -32,21 +34,17 @@ export class AdminPanelComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(private dataService:  DataService){
-    // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // this.dataSource = new MatTableDataSource(users);
+  constructor(private dataService:  DataService, public dialog: MatDialog){
   }
 
   ngOnInit(): void {
-    this.dataService.getAllProductsList().then((products:Products)=>{
+    this.dataService.getAllProductsList().then((products:any)=>{
       console.log('PRODUCTS--->',products)
-    })
-  }
+      this.dataSource = new MatTableDataSource(products);
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
   }
 
   applyFilter(event: Event) {
@@ -58,20 +56,11 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
+  openDialog(){
+    this.dialog.open(ProductsAdminComponent,{
+      width: '500px'
+    });
+  }
+
 
 }
-
-// function createNewUser(id: number): any {
-//   const name =
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-//     ' ' +
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-//     '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-//   };
-// }
