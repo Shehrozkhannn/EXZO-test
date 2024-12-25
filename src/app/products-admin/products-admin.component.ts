@@ -1,5 +1,6 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, Inject, input, OnInit } from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -13,20 +14,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-products-admin',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogActions, MatDialogClose, MatButtonModule, MatFormFieldModule, MatInputModule,MatIconModule,CommonModule,ReactiveFormsModule],
+  imports: [MatDialogTitle, MatDialogActions, MatDialogClose, MatButtonModule, MatFormFieldModule, MatInputModule,MatIconModule,CommonModule,ReactiveFormsModule, MatProgressSpinner],
   templateUrl: './products-admin.component.html',
   styleUrl: './products-admin.component.scss'
 })
 export class ProductsAdminComponent implements OnInit{
   uploadedFileName: string | null = null;
-  selectedFile: File | null = null
-  productsForm!: FormGroup
+  productsForm!: FormGroup;
+  productsLoader: boolean = false;
 
-  constructor(private fb: FormBuilder, private dataService: DataService){
+  constructor(private fb: FormBuilder, private dataService: DataService, @Inject(MAT_DIALOG_DATA) public data: any){
   }
 
   ngOnInit(): void {
@@ -36,6 +38,16 @@ export class ProductsAdminComponent implements OnInit{
       description: ['', Validators.required],
       ratings: ['', Validators.required],
     });
+    if(this.data){
+      const {productName , description ,  price , ratings, id} = this.data;
+      this.productsForm.setValue({
+        productName: productName,
+        description: description,
+        price: price,
+        ratings: ratings,
+      });
+      this.productsForm.addControl('id', this.fb.control(id || null));
+    }
   }
 
   triggerFileInput(event: Event): void {
@@ -52,7 +64,6 @@ export class ProductsAdminComponent implements OnInit{
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-      this.selectedFile = input.files[0];
       const file = input.files[0];
       this.uploadedFileName = file.name;
       console.log('Selected file:', file);
@@ -60,19 +71,31 @@ export class ProductsAdminComponent implements OnInit{
   }
 
   async saveForm() {
-    if (this.productsForm.valid && this.selectedFile) {
-      const productsData = { ...this.productsForm.value, stars: [] };
+    this.productsLoader = true
+    if (this.productsForm.valid) {
+      const productsData = { ...this.productsForm.value, stars: [],  imageUrl: '../../assets/user.png'};
+      const { id } = productsData;
+      console.log(productsData)
       try {
-        await this.dataService.addProduct(productsData, this.selectedFile);
-        alert('Product added successfully!');
-        this.productsForm.reset();
-        this.selectedFile = null; // Clear selected file
+        if(id){
+          await this.dataService.updateProduct(id, productsData);
+          console.log('Product updated successfully with ID:', id);
+          alert('Product updated successfully!');
+        }else {
+          const newDocId = await this.dataService.addProduct(productsData);
+          console.log('Product added with ID:', newDocId);
+          alert('Product added successfully!');
+          this.productsForm.reset();
+          this.productsLoader = false;
+        }
       } catch (error) {
         console.error('Error adding product:', error);
         alert('Failed to add product. Please try again.');
+        this.productsLoader = false;
       }
     } else {
-      alert('Please fill out all fields and select an image.');
+      alert('Please fill out all required fields.');
+      this.productsLoader = false;
     }
   }
 }

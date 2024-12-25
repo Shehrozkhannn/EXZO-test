@@ -9,6 +9,7 @@ import { firebaseConfig } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -19,5 +20,6 @@ export const appConfig: ApplicationConfig = {
      provideAuth(() => getAuth()),
      importProvidersFrom(HttpClientModule),
      importProvidersFrom(MatSelectCountryModule.forRoot('en')), 
+     provideStorage(() => getStorage())
     ]
 };

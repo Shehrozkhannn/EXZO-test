@@ -8,6 +8,8 @@ import { Products } from '../interfaces/products';
 import { DataService } from '../data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductsAdminComponent } from '../products-admin/products-admin.component';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 // export interface UserData {
 //   id: string;
@@ -21,7 +23,7 @@ import { ProductsAdminComponent } from '../products-admin/products-admin.compone
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule, MatProgressSpinner],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.scss'
 })
@@ -33,18 +35,29 @@ export class AdminPanelComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
+  productsLoader: boolean = false;
 
   constructor(private dataService:  DataService, public dialog: MatDialog){
   }
 
   ngOnInit(): void {
-    this.dataService.getAllProductsList().then((products:any)=>{
-      console.log('PRODUCTS--->',products)
-      this.dataSource = new MatTableDataSource(products);
+    this.getAllProducts();
+  }
 
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
+  async getAllProducts() {
+    try {
+      this.productsLoader = true
+      await this.dataService.getAllProductsList().then((products:any)=>{
+        console.log('PRODUCTS--->',products)
+        this.dataSource = new MatTableDataSource(products);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.productsLoader = false;
+      });
+    } catch (error) {
+      this.productsLoader = true;
+      console.error('Error fetching products:', error);
+    }
   }
 
   applyFilter(event: Event) {
@@ -56,11 +69,14 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
-  openDialog(){
+  openDialog(row : any | null = null){
     this.dialog.open(ProductsAdminComponent,{
-      width: '500px'
+      width: '500px',
+      data: row ? {...row} : null
     });
   }
 
-
+  deleteProduct(product:Products){
+   this.dataSource.data = this.dataSource.data.filter((val)=> val.id !== product.id);
+  }
 }

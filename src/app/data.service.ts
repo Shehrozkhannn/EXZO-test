@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -37,21 +36,26 @@ export class DataService {
     }
   }
 
-    // Add a product to Firestore
-    async addProduct(productData: any, file: File) {
+    // Add a product to Firestore (admin)
+    async addProduct(productData: any) {
       try {
-          // Upload file to Firebase Storage
-      const storage = getStorage();
-      const fileRef = ref(storage, `products/${file.name}`);
-      const snapshot = await uploadBytes(fileRef, file);
-      const imageUrl = await getDownloadURL(snapshot.ref);
-
         const collectionRef = collection(this.firestore, 'Products');
-        const docRef = await addDoc(collectionRef, {...productData, imageUrl});
+        const docRef = await addDoc(collectionRef, productData);
         console.log('Document added with ID:', docRef.id);
         return docRef.id; // Return the generated document ID
       } catch (error) {
         console.error('Error adding document:', error);
+        throw error;
+      }
+    }
+    // Update product to firestore (admin)
+    async updateProduct(productId: string, productData: any) {
+      try {
+        const productRef = doc(this.firestore, 'Products', productId);
+        await updateDoc(productRef, productData);
+        console.log('Product updated with ID:', productId);
+      } catch (error) {
+        console.error('Error updating product:', error);
         throw error;
       }
     }

@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" style="position: relative;">
     <header>
         <div class="title">
             <span class="green">E</span>XZO <span class="green">A</span>DMIN <span class="green">P</span>ANEL
@@ -86,8 +86,8 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                     <td mat-cell *matCellDef="let row" style="display: flex; align-items: center;">
-                        <button class="edit">Edit</button>
-                        <button class="delete">Delete</button>
+                        <button class="edit" (click)="openDialog(row)">Edit</button>
+                        <button class="delete" (click)="deleteProduct(row)">Delete</button>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -104,4 +104,8 @@
 
 
     </div>
+    <div class="spinner" *ngIf="productsLoader" style="position: absolute; display: flex; justify-content: center; align-items: center; width: 100%;z-index: 1;top: 50%;">
+        <mat-spinner [diameter]="70"></mat-spinner>
+      </div>
 </div>
+
