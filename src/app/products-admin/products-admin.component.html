@@ -1,27 +1,45 @@
 <h2 mat-dialog-title>Add New Product</h2>
-<form action="">
+<form [formGroup]="productsForm">
     <mat-form-field appearance="outline">
         <mat-label>Product Name</mat-label>
-        <input matInput placeholder="Enter product name">
+        <input matInput placeholder="Enter product name" formControlName="productName">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Price</mat-label>
-        <input matInput placeholder="Enter price">
+        <input matInput placeholder="Enter price" formControlName="price">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <input matInput placeholder="Enter description">
+        <input matInput placeholder="Enter description" formControlName="description">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Ratings</mat-label>
-        <input matInput placeholder="Enter ratings">
+        <input matInput placeholder="Enter ratings" formControlName="ratings">
       </mat-form-field>
+
+      <div style="text-align: left;">
+        <label for="productImage" style="font-weight: bold; margin-bottom: 8px; display: block;">Product Image</label>
+        <button mat-flat-button color="primary" (click)="triggerFileInput($event)" style="margin-right: 8px;">
+          <mat-icon>upload</mat-icon> Choose File
+        </button>
+        <span *ngIf="uploadedFileName" style="font-style: italic; color: #555;">{{ uploadedFileName }}</span>
+        <input
+          #fileInput
+          id="productImage"
+          type="file"
+          (click)="preventDialogClose($event)"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          style="display: none;"
+        />
+      </div>
+      
 </form>
 <mat-dialog-actions style="display: flex; justify-content: end;">
   <button mat-button mat-dialog-close style="background-color: rgb(110, 106, 100); color: white;">Close</button>
-  <button mat-button mat-dialog-close style="background-color: #b1cd02; color: white;">Save</button>
+  <button mat-button style="background-color: #b1cd02; color: white;" (click)="saveForm()">Save</button>
 </mat-dialog-actions>
 

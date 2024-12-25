@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -35,6 +36,25 @@ export class DataService {
       console.error('Error fetching documents:', error);
     }
   }
+
+    // Add a product to Firestore
+    async addProduct(productData: any, file: File) {
+      try {
+          // Upload file to Firebase Storage
+      const storage = getStorage();
+      const fileRef = ref(storage, `products/${file.name}`);
+      const snapshot = await uploadBytes(fileRef, file);
+      const imageUrl = await getDownloadURL(snapshot.ref);
+
+        const collectionRef = collection(this.firestore, 'Products');
+        const docRef = await addDoc(collectionRef, {...productData, imageUrl});
+        console.log('Document added with ID:', docRef.id);
+        return docRef.id; // Return the generated document ID
+      } catch (error) {
+        console.error('Error adding document:', error);
+        throw error;
+      }
+    }
     waitForUserId(): Promise<string> {
       return new Promise((resolve) => {
         const unsubscribe = this.auth.onAuthStateChanged((user) => {
