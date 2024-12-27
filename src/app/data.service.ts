@@ -41,7 +41,6 @@ export class DataService {
       try {
         const collectionRef = collection(this.firestore, 'Products');
         const docRef = await addDoc(collectionRef, productData);
-        console.log('Document added with ID:', docRef.id);
         return docRef.id; // Return the generated document ID
       } catch (error) {
         console.error('Error adding document:', error);
@@ -53,7 +52,6 @@ export class DataService {
       try {
         const productRef = doc(this.firestore, 'Products', productId);
         await updateDoc(productRef, productData);
-        console.log('Product updated with ID:', productId);
       } catch (error) {
         console.error('Error updating product:', error);
         throw error;

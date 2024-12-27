@@ -48,7 +48,6 @@ export class AdminPanelComponent implements OnInit {
     try {
       this.productsLoader = true
       await this.dataService.getAllProductsList().then((products:any)=>{
-        console.log('PRODUCTS--->',products)
         this.dataSource = new MatTableDataSource(products);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

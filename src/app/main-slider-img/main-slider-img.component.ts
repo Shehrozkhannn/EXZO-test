@@ -45,7 +45,6 @@ get customStyles() {
   return this.variant === 'second' ? 'custom-styles-for-second-slider' : '';
 }
 addtoCart(){
-  console.log(this.isUserLoggedIn)
   this.dialog.open(AddToCartProductsComponent,{
     data: this.viewProducts,
     autoFocus: false,

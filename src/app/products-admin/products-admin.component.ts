@@ -66,7 +66,6 @@ export class ProductsAdminComponent implements OnInit{
     if (input.files && input.files[0]) {
       const file = input.files[0];
       this.uploadedFileName = file.name;
-      console.log('Selected file:', file);
     }
   }
 
@@ -75,15 +74,12 @@ export class ProductsAdminComponent implements OnInit{
     if (this.productsForm.valid) {
       const productsData = { ...this.productsForm.value, stars: [],  imageUrl: '../../assets/user.png'};
       const { id } = productsData;
-      console.log(productsData)
       try {
         if(id){
           await this.dataService.updateProduct(id, productsData);
-          console.log('Product updated successfully with ID:', id);
           alert('Product updated successfully!');
         }else {
           const newDocId = await this.dataService.addProduct(productsData);
-          console.log('Product added with ID:', newDocId);
           alert('Product added successfully!');
           this.productsForm.reset();
           this.productsLoader = false;
